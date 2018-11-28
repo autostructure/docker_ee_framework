@@ -1,28 +1,10 @@
 #!/bin/sh
 
-# Puppet Task Name: 
+# If using Ruby...
+# !/usr/bin/env ruby
 #
-# This is where you put the shell code for your task.
+# Puppet Task Name: create_ucp_leader
 #
-# You can write Puppet tasks in any language you want and it's easy to 
-# adapt an existing Python, PowerShell, Ruby, etc. script. Learn more at:
-# http://puppet.com/docs/bolt/latest/converting_scripts_to_tasks.html 
-# 
-# Puppet tasks make it easy for you to enable others to use your script. Tasks 
-# describe what it does, explains parameters and which are required or optional, 
-# as well as validates parameter type. For examples, if parameter "instances" 
-# must be an integer and the optional "datacenter" parameter must be one of 
-# portland, sydney, belfast or singapore then the .json file 
-# would include:
-#   "parameters": {
-#     "instances": {
-#       "description": "Number of instances to create",
-#       "type": "Integer"
-#     }, 
-#     "datacenter": {
-#       "description": "Datacenter where instances will be created",
-#       "type": "Enum[portland, sydney, belfast, singapore]"
-#     }
-#   }
-# Learn more at: https://puppet.com/docs/bolt/latest/task_metadata.html
-#
+my_fqdn=`hostname -f`
+my_ip=`facter ipaddress`
+docker container run --rm -it --name ucp-leader -v /var/run/docker.sock:/var/run/docker.sock $PT_docker_image install --force-minimums --host-address $my_ip --san $my_fqdn --pod-cidr $PT_pod_cidr --admin-username $PT_ucp_admin_username --admin-password $PT_ucp_admin_password
