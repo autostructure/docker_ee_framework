@@ -1,4 +1,4 @@
-#!/opt/puppetlabs/puppet/lib/ruby
+#!/opt/puppetlabs/puppet/bin/ruby
 
 # Puppet Task Name: print_worker_token
 #

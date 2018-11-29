@@ -1,4 +1,4 @@
-#!/opt/puppetlabs/puppet/lib/ruby
+#!/opt/puppetlabs/puppet/bin/ruby
 
 # !/usr/bin/env ruby
 
