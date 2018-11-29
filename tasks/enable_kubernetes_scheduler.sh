@@ -12,3 +12,5 @@ docker node update --label-rm com.docker.ucp.orchestrator.swarm --label-add com.
 
 # remove swarm scheduler
 #docker node update --label-rm com.docker.ucp.orchestrator.swarm $PT_target_node
+
+puts `docker node inspect self | grep -i orchestrator`
