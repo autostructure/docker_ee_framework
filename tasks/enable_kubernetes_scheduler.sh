@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Puppet Task Name: ucp_set_kubernetes_scheduling
+# Puppet Task Name: enable_kubernetes_scheduler
 #
 # @Usage
 # You MUST run this task on a UCP manager node,

@@ -19,8 +19,5 @@
       "type": "String",
       "description": "UCP Admin password"
     }
-  },
-  "implementations": [
-    {"name": "ucp_create_leader.sh"}
-  ]
+  }
 }

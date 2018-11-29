@@ -1,11 +1,24 @@
 #!/usr/bin/env ruby
 
-# Puppet Task Name: ucp_print_worker_token
+# Puppet Task Name: print_worker_token
 #
 # @Usage
 # You MUST run this task on a UCP manager node.
 # Outputs the token need to join the UCP as a worker.
+#
 
+
+# #!/usr/bin/env ruby
+# require 'json'
+# params = JSON.parse(STDIN.read)
+# action = params['action'] || params['_task']
+# if ['start',  'stop'].include?(action)
+#   `systemctl #{params['_task']} #{params['service']}`
+# end
+
+#require 'json'
+#params = JSON.parse(STDIN.read)
+#puts .to_json
 
 
 
@@ -26,10 +39,10 @@
 {
   "files": ["multi_task/files/rb_helper.rb"]
 }
-File resource
+
+# File resource
 
 # multi_task/files/rb_helper.rb
-
 def useful_ruby
   { helper: "ruby" }
 end
