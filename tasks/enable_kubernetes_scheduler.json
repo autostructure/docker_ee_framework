@@ -3,7 +3,7 @@
   "supports_noop": false,
   "description": "Set Docker scheduler to Kubernetes and turn off Swarm (MUST be run on a UCP manager).",
   "parameters": {
-    "target_node": {
+    "node": {
       "type": "String",
       "description": "Target node's hostname"
     }

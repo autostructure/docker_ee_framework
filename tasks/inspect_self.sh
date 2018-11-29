@@ -5,4 +5,4 @@
 # @Usage
 # Run this task on any node to output scheduler settings.
 #
-docker node inspect self | grep -i orchestrator
+docker node inspect self | grep -i orchestrator | tr -s [:space:]
