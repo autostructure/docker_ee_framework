@@ -18,16 +18,16 @@ This modules leverages Puppet Enterprise Task Management to setup a
 Docker Universal Control Plane (UCP).
 
 Tasks:
-*assign_leader*
-*assign_node*
-*enable_kubernetes_scheduler*
-*inspect_scheduler*
-*inspect_self*
-*list_nodes*
-*nfs_restart*
-*print_tokens*
-*print_manager_token*
-*print_worker_token*
+* *assign_leader*
+* *assign_node*
+* *enable_kubernetes_scheduler*
+* *inspect_scheduler*
+* *inspect_self*
+* *list_nodes*
+* *nfs_restart*
+* *print_tokens*
+* *print_manager_token*
+* *print_worker_token*
 
 ## Setup
 
