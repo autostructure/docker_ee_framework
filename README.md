@@ -1,40 +1,14 @@
 
 # docker_ucp
 
-This modules leverages Puppet Enterprise Task Management to setup a
-Docker Universal Control Plane (UCP).
-
-Tasks:
-assign_leader
-assign_node
-enable_kubernetes_scheduler
-inspect_scheduler
-inspect_self
-list_nodes
-nfs_restart
-print_tokens
-print_manager_token
-print_worker_token
-
-#Order of Operation
-1. nfs_restart
-2. assign_leader
-3. enable_kubernetes_scheduler (on leader)
-4. print_tokens
-5. assign_node (pass manager token)
-6. assign_node (pass worker token)
-7. enable_kubernetes_scheduler (for each manager/worker)
-8. inspect_scheduler (for each manager/worker)
-9. list_nodes
-
+This modules hosts Puppet Tasks used to setup a Docker Universal Control Plane (UCP).
 
 #### Table of Contents
 
 1. [Description](#description)
-2. [Setup - The basics of getting started with docker_ucp](#setup)
-    * [What docker_ucp affects](#what-docker_ucp-affects)
+2. [Setup](#setup)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with docker_ucp](#beginning-with-docker_ucp)
+    * [Order of Task Execution](#order-of-task-execution)
 3. [Usage - Configuration options and additional functionality](#usage)
 
 
@@ -44,16 +18,16 @@ This modules leverages Puppet Enterprise Task Management to setup a
 Docker Universal Control Plane (UCP).
 
 Tasks:
-assign_leader
-assign_node
-enable_kubernetes_scheduler
-inspect_scheduler
-inspect_self
-list_nodes
-nfs_restart
-print_tokens
-print_manager_token
-print_worker_token
+*assign_leader*
+*assign_node*
+*enable_kubernetes_scheduler*
+*inspect_scheduler*
+*inspect_self*
+*list_nodes*
+*nfs_restart*
+*print_tokens*
+*print_manager_token*
+*print_worker_token*
 
 ## Setup
 
@@ -69,7 +43,7 @@ mod 'docker_ucp',
 
 **NOTE:** Puppet Tasks only appear if added to the Production environment!
 
-### Order of Operation
+### Order of Task Execution
 1. nfs_restart
 1. assign_leader
 1. enable_kubernetes_scheduler (on leader)
