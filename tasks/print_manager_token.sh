@@ -1,4 +1,6 @@
-#!/usr/bin/env ruby
+#!/opt/puppetlabs/puppet/lib/ruby
+
+# !/usr/bin/env ruby
 
 # Puppet Task Name: print_manager_token
 #
