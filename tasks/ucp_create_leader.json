@@ -5,26 +5,22 @@
   "parameters": {
     "docker_image": {
       "type": "String",
-      "description": "docker/ucp:3.1.0"
-    },
-    "docker_image": {
-      "type": "String",
-      "description": "docker/ucp:3.1.0"
+      "description": "e.g. docker/ucp:3.1.0"
     },
     "pod_cidr": {
       "type": "String",
-      "description": "10.0.0.0/16"
+      "description": "e.g. 10.0.0.0/16"
     },
     "ucp_admin_username": {
       "type": "String",
-      "description": "root"
+      "description": "UCP Admin username (e.g. root)"
     },
     "ucp_admin_password": {
       "type": "String",
-      "description": "password"
+      "description": "UCP Admin password"
     }
   },
   "implementations": [
-    {"name": "create_ucp_leader.sh"}
+    {"name": "ucp_create_leader.sh"}
   ]
 }
