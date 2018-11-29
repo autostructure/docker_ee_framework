@@ -11,6 +11,6 @@
 docker node update --label-rm com.docker.ucp.orchestrator.swarm --label-add com.docker.ucp.orchestrator.kubernetes=true $PT_target_node
 
 # remove swarm scheduler
-#docker node update --label-rm com.docker.ucp.orchestrator.swarm $PT_target_node
+# docker node update --label-rm com.docker.ucp.orchestrator.swarm $PT_target_node
 
-docker node inspect self | grep -i orchestrator
+#docker node inspect $PT_target_node | grep -i orchestrator
