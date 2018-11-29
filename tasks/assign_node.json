@@ -9,7 +9,7 @@
     },
     "ucp_addr": {
       "type": "String",
-      "description": "e.g. ucp.mydomain.com, 192.168.0.100, etc."
+      "description": "e.g. ucp.domain.com, 192.168.0.100, etc."
     }
   }
 }
