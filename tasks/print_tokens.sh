@@ -11,5 +11,5 @@
 puts 'manager-token='
 puts `docker swarm join-token -q manager`
 
-puts 'worker-token='puts `docker swarm join-token -q worker`
+puts 'worker-token='
 puts `docker swarm join-token -q worker`
