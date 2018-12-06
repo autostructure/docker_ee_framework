@@ -3,7 +3,7 @@
 # The nfs-client CLI command to test mounting...
 # $ showmount -e <nfs-server-hostname-or-ip>
 #
-class profile::nfs_server(
+class docker_ucp::nfs_server(
   Array  $nfs_server_mount_parents,
   String $nfs_server_mount,
 ) {
