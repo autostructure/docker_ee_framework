@@ -8,7 +8,7 @@
 # Use the docker_ucp Puppet Tasks to retrieve tokens and join clusters.
 #
 class docker_ucp::docker_ucp_worker (
-  Stdlib::Httpurl $docker_ee_source_location,
+  Stdlib::Httpurl $docker_ee_url,
   Stdlib::Httpurl $docker_ee_key_source,
   Array           $nfs_client_mount_parents,
   String          $nfs_client_mount,
@@ -28,7 +28,7 @@ class docker_ucp::docker_ucp_worker (
 
   class { '::docker':
     docker_ee                 => true,
-    docker_ee_source_location => $docker_ee_source_location,
+    docker_ee_source_location => $docker_ee_url,
     docker_ee_key_source      => $docker_ee_key_source,
   }
 
