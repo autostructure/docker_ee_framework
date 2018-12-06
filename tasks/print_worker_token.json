@@ -3,5 +3,8 @@
   "supports_noop": false,
   "description": "Display Docker UCP worker token (docker swarm join-token worker).",
   "parameters": {
-  }
+  },
+  "implementations": [
+    {"name": "print_worker_token.rb"}
+  ]
 }

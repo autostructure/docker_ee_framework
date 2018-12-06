@@ -2,11 +2,20 @@
   "name": "autostructure-docker_ucp",
   "version": "0.1.0",
   "author": "Jeffrey Frelick",
-  "summary": "",
+  "summary": "The docker_ucp module helps setup Docker UCP in the control-repo",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/autostructure/docker_ucp.git",
+  "project_page": "https://github.com/autostructure/docker_ucp",
+  "issues_url": "https://github.com/autostructure/docker_ucp/issues",
   "dependencies": [
-
+    {
+      "name": "puppetlabs-docker",
+      "version_requirement": ">= 3.1.0 < 4.0.0"
+    },
+    {
+      "name": "autostructure-harden_docker",
+      "version_requirement": ">= 1.0.6 < 2.0.0"
+    }
   ],
   "operatingsystem_support": [
     {

@@ -1,0 +1,9 @@
+---
+# Field hiera.yaml hierarchy entry:
+#  - "role/%{::trusted.extensions.pp_role}"
+# This file is for:
+# pp_role = nfs_server
+#
+profile::nfs_server::nfs_server_mount: /nfs-share/docker-workers
+profile::nfs_server::nfs_server_mount_parents:
+  - /nfs-share

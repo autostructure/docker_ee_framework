@@ -3,5 +3,8 @@
   "supports_noop": false,
   "description": "Display Docker UCP manager token (docker swarm join-token manager).",
   "parameters": {
-  }
+  },
+  "implementations": [
+    {"name": "print_manager_token.rb"}
+  ]
 }
