@@ -29,7 +29,7 @@ class docker_ucp::nfs_server(
   # Is portmap replaced by 'nfs-idmapd.service'?
   # Didn't need portmap (using CentOS 7),
   # it wasn't even installed.
-  # So, it is commented out...
+  # So, it's commented out...
 
   # # /etc/init.d/portmap start
   # service { 'portmap':
