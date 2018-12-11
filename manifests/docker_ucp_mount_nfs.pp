@@ -51,7 +51,7 @@ class docker_ucp::docker_ucp_mount_nfs(
     tag    => 'nfs_client',
   }
 
-  @@file_line { '/etc/exports':
+  @@file_line { "/etc/exports mod for ${::fqdn}":
     ensure => present,
     path   => '/etc/exports',
     line   => "${nfs_server_mount}/${::fqdn} ${::fqdn}(rw,sync,no_root_squash)",
