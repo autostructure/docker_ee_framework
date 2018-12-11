@@ -45,7 +45,7 @@ class docker_ucp::nfs_server(
   file_line { '/etc/exports - add domain to share config':
     ensure => present,
     path   => '/etc/exports',
-    line   => "${nfs_server_mount} ${::domain}(rw,sync,no_root_squash)",
+    line   => "${nfs_server_mount} *.${::domain}(rw,sync,no_root_squash)",
     notify => Service['nfs'],
   }
 
