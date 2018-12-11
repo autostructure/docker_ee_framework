@@ -11,5 +11,5 @@ profile::docker_ucp_worker::nfs_client_mount_parents:
   - /var
   - /var/lib
 profile::docker_ucp_worker::nfs_host: nfs.autostructure.io
-profile::docker_ucp_worker::nfs_server_mount: /nfs-share/docker-workers/jenkins
+profile::docker_ucp_worker::nfs_server_mount: docker-workers/jenkins
 profile::docker_ucp_worker::docker_image: docker/ucp:3.1.0

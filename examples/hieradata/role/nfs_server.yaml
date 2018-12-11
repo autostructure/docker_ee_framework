@@ -5,6 +5,7 @@
 # pp_role = nfs_server
 #
 profile::nfs_server::nfs_server_mount: /nfs-share/docker-workers/jenkins
+profile::nfs_server::nfs_server_mount_root: /nfs-share
 profile::nfs_server::nfs_server_mount_parents:
   - /nfs-share
   - /nfs-share/docker-workers

@@ -15,6 +15,9 @@
 # The equivalent 'mount' command (w/o modifying fstab):
 # $ mount -t nfs4 nfs.autostructure.io:/nfs-share/docker-workers /mnt/docker/app-share
 #
+# This command worked...
+# mount -v -t nfs4 nfs.autostructure.io:docker-workers/jenkins /var/lib/jenkins
+#
 # The nfs-client CLI command to test mounting...
 # $ showmount -e <nfs-server-hostname-or-ip>
 #
@@ -44,7 +47,7 @@ class docker_ucp::docker_ucp_mount_nfs(
   }
 
   mount { $nfs_client_mount:
-    ensure  => 'mounted',
+    ensure  => mounted,
     device  => "${nfs_host}:${nfs_server_mount}",
     dump    => '0',
     fstype  => 'nfs4',

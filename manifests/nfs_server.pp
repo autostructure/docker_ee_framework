@@ -10,6 +10,7 @@
 
 class docker_ucp::nfs_server(
   Array  $nfs_server_mount_parents,
+  String $nfs_server_mount_root,
   String $nfs_server_mount,
 ) {
 
@@ -41,6 +42,13 @@ class docker_ucp::nfs_server(
   #   ensure => running,
   #   enable => true,
   # }
+
+  file_line { '/etc/exports - nfs root':
+    ensure => present,
+    path   => '/etc/exports',
+    line   => "${nfs_server_mount_root} *(ro,fsid=0)",
+    notify => Service['nfs'],
+  }
 
   file_line { '/etc/exports - add domain to share config':
     ensure => present,
