@@ -18,11 +18,6 @@
 # The nfs-client CLI command to test mounting...
 # $ showmount -e <nfs-server-hostname-or-ip>
 #
-
-# Class before moving to a single shared directory.
-# Below (and in docker_ucp_mount_nfs.pp) are
-# exported File & File_line resources...
-
 class docker_ucp::docker_ucp_mount_nfs(
   Array  $nfs_client_mount_parents,
   String $nfs_client_mount,
@@ -48,25 +43,9 @@ class docker_ucp::docker_ucp_mount_nfs(
     mode   => '0777',
   }
 
-  @@file { "${nfs_server_mount}/${::fqdn}":
-    ensure => directory,
-    owner  => nobody,
-    group  => nobody,
-    mode   => '0777',
-    tag    => 'nfs_client',
-  }
-
-  @@file_line { "/etc/exports mod for ${::fqdn}":
-    ensure => present,
-    path   => '/etc/exports',
-    line   => "${nfs_server_mount}/${::fqdn} ${::fqdn}(rw,sync,no_root_squash)",
-    tag    => 'nfs_client',
-    notify => Service['nfs'],
-  }
-
   mount { $nfs_client_mount:
     ensure  => 'mounted',
-    device  => "${nfs_host}:${nfs_server_mount}/${::fqdn}",
+    device  => "${nfs_host}:${nfs_server_mount}",
     dump    => '0',
     fstype  => 'nfs4',
     options => 'defaults',

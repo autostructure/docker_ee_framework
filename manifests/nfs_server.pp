@@ -17,18 +17,18 @@ class docker_ucp::nfs_server(
     ensure   => present,
   }
 
-  file { $nfs_server_mount:
+  file { $nfs_server_mount_parents:
     ensure => directory,
-    owner  => 'root',
-    group  => 'root',
+    owner  => root,
+    group  => root,
     mode   => '0755',
   }
 
-  file { $nfs_server_mount_parents:
+  file { $nfs_server_mount:
     ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+    owner  => nobody,
+    group  => nobody,
+    mode   => '0777',
   }
 
   # Is portmap replaced by 'nfs-idmapd.service'?
@@ -42,16 +42,18 @@ class docker_ucp::nfs_server(
   #   enable => true,
   # }
 
+  file_line { '/etc/exports - add domain to share config':
+    ensure => present,
+    path   => '/etc/exports',
+    line   => "${nfs_server_mount} ${::domain}(rw,sync,no_root_squash)",
+    notify => Service['nfs'],
+  }
+
   # /etc/init.d/nfs start
   service { 'nfs':
     ensure     => running,
     enable     => true,
     hasrestart => true,
     restart    => 'systemctl restart nfs',
-    #subscribe => '/etc/exports',
   }
-
-  File <<| tag == 'nfs_client' |>>
-  File_line <<| tag == 'nfs_client' |>>
-
 }
