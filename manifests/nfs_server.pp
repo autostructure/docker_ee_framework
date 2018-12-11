@@ -3,6 +3,11 @@
 # The nfs-client CLI command to test mounting...
 # $ showmount -e <nfs-server-hostname-or-ip>
 #
+
+# Class before moving to a single shared directory.
+# Below (and in docker_ucp_mount_nfs.pp) are
+# exported File & File_line resources...
+
 class docker_ucp::nfs_server(
   Array  $nfs_server_mount_parents,
   String $nfs_server_mount,
