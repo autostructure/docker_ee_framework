@@ -46,7 +46,7 @@ class docker_ucp::nfs_server(
   file_line { '/etc/exports - nfs root':
     ensure => present,
     path   => '/etc/exports',
-    line   => "${nfs_server_mount_root} *(ro,fsid=0)",
+    line   => "${nfs_server_mount_root} *(rw,fsid=0)",
     notify => Service['nfs'],
   }
 
