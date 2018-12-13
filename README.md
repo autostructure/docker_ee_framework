@@ -110,6 +110,46 @@ profile::nameserver::a_records:
     data:
       - 192.168.5.61
 
+16. Test the cluster...
+
+#### kubectl Commands
+
+kubectl create -f nfs-server.yaml
+
+# enter nfs-server ip-addr into "server:" in "nfs-storage.yaml"...
+kubectl describe pod nfs-server | grep IP:
+vi nfs-storage.yaml
+kubectl create -f nfs-storage.yaml
+
+kubectl create -f nfs-volume.yaml
+
+kubectl create -f nfs-claim.yaml
+
+kubectl create -f nginx-deployment.yaml
+
+kubectl create -f nginx-service.yaml
+
+kubectl get pods -l app=nginx -o wide
+
+kubectl get svc nginx-service -o yaml | grep nodePort -C 5
+
+kubectl get nodes -o yaml | grep InternalIP -C 1
+
+kubectl get nodes -o yaml | grep ExternalIP -C 1
+
+curl http://192.168.5.39:32781 -k
+
+.
+.
+.
+
+kubectl delete svc nginx-service
+kubectl delete deployment nginx-deployment
+kubectl delete pvc nfs-claim-3g
+kubectl delete pv nfs-vol-001
+kubectl delete storageclass nfs-storage
+kubectl delete pod nfs-server
+
 ## Usage
 
 TBD
