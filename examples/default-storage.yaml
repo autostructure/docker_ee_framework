@@ -11,4 +11,5 @@ metadata:
 provisioner: kubernetes.io/nfs
 parameters:
   path: /
-  server: <nfs-server-pod-ip-address>
+  server: 10.0.61.66
+  # server: <nfs-server-pod-ip-address>
