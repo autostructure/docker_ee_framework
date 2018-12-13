@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-persistent-vol-001
+  labels:
+    type: local
+spec:
+  storageClassName: default-storage
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/data/persistent-vol-001
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-persistent-vol-002
+  labels:
+    type: local
+spec:
+  storageClassName: default-storage
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/data/persistent-vol-002
