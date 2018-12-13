@@ -1,0 +1,19 @@
+---
+# Note: first, replace "<nfs-server-pod-ip-address>" by running this command:
+# $ kubectl describe pod nfs-server | grep IP:
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  # namespace: default
+  name: nfs-storage
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  labels:
+    kubernetes.io/cluster-service: "true"
+provisioner: kubernetes.io/nfs
+parameters:
+  path: /
+  server: <nfs-server-pod-ip-address>
+  # server: <nfs-server-pod-ip-address>
+# nfs volume expansion not supported.
+# allowVolumeExpansion: true

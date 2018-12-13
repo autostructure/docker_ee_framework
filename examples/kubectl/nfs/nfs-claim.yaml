@@ -1,0 +1,15 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nfs-claim-3g
+spec:
+  storageClassName: nfs-storage
+  accessModes:
+    - ReadWriteMany
+    # - ReadWriteOnce
+    # - ReadOnlyMany
+    # - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
