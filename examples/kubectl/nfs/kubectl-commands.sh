@@ -15,11 +15,14 @@ echo "Assigning nfs-server IP address to storageClass server parameter."
 # cp nfs-storage.yaml nfs-storage.yaml.template
 export POD_IP=`kubectl describe pod nfs-server | grep IP: | grep -oE '[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}'`
 sed "s/replace-with-nfs-server-pod-ip-address/${POD_IP}/g" nfs-storage.yaml.template > nfs-storage.yaml
+cat nfs-storage.yaml
+pause
 kubectl create -f nfs-storage.yaml
+# reset nfs-storage.yaml
 cp nfs-storage.yaml.template nfs-storage.yaml
 # rm nfs-storage.yaml.template
 
-# kubectl create -f nfs-volume.yaml
+kubectl create -f nfs-volume.yaml
 
 kubectl create -f nfs-claim.yaml
 
@@ -44,7 +47,7 @@ echo  "You must use the InternalIP/ExternalIP and the nodePort"
 echo "e.g."
 echo "curl http://192.168.5.39:32781 -k"
 
-# ssh worker001.autostructure.io
+# ssh worker004.autostructure.io
 # su
 # docker ps
-# docker container exec -it k8s_nfs-server_nfs-server_default_38ce311f-fefd-11e8-9018-0242ac110004_0 cat /etc/exports
+# docker container exec -it k8s_nginx_nginx-deployment-7fc7d55995-drsmr_default_2d184d1f-ffed-11e8-9018-0242ac110004_0 ls -pal /mnt/nfs/nginx

@@ -1,5 +1,5 @@
 ---
-# Note: first, replace "replace-with-nfs-server-pod-ip-address" by running this command:
+# Note: first, replace "10.0.65.68" by running this command:
 # $ kubectl describe pod nfs-server | grep IP:
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
@@ -14,7 +14,7 @@ provisioner: kubernetes.io/nfs
 reclaimPolicy: Retain
 parameters:
   path: /
-  server: replace-with-nfs-server-pod-ip-address
+  server: 10.0.65.68
   # fsType: ext4
   # Volume expansion not supported for nfs storage
   # allowVolumeExpansion: true
