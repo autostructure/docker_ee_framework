@@ -43,7 +43,7 @@ kubectl get nodes -o yaml | grep InternalIP -C 1
 kubectl get svc nginx-service -o yaml | grep nodePort -C 5
 
 echo "Test the nginx install by returning a web page using the curl command."
-echo  "You must use the InternalIP/ExternalIP and the nodePort"
+echo "You must use the InternalIP/ExternalIP and the nodePort"
 echo "e.g."
 echo "curl http://192.168.5.39:32781 -k"
 
