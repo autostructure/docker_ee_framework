@@ -3,6 +3,10 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: nfs-claim-3g
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "nfs-storage"
+  labels:
+    app: nginx
 spec:
   storageClassName: nfs-storage
   accessModes:

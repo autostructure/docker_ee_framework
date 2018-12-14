@@ -8,10 +8,11 @@ metadata:
     role: nfs-server
 spec:
   tolerations:
-  - key: node-role.kubernetes.io/master
+  - key: node-role.kubernetes.io/nfs-server
     effect: NoSchedule
   nodeSelector:
-    node-role.kubernetes.io/master: ""
+    node-role.kubernetes.io/nfs-server: "nfs-server"
+  restartPolicy: Always
   containers:
   - name: nfs-server
     image: gcr.io/google_containers/volume-nfs:0.8
@@ -21,4 +22,9 @@ spec:
       - name: nfs-0
         containerPort: 2049
         protocol: TCP
-  restartPolicy: Always
+    # volumeMounts:
+    #   - name: nfs-root-volume
+    #     mountPath: /exports
+  # volumes:
+  #   - name: nfs-root-volume
+  #     emptyDir: {}
