@@ -50,4 +50,4 @@ echo "curl http://192.168.5.39:32781 -k"
 # ssh worker004.autostructure.io
 # su
 # docker ps
-# docker container exec -it k8s_nginx_nginx-deployment-7fc7d55995-drsmr_default_2d184d1f-ffed-11e8-9018-0242ac110004_0 ls -pal /mnt/nfs/nginx
+# docker container exec -it k8s_nginx_nginx-deployment-7fc7d55995-9zfsg_default_f120b2a0-ffee-11e8-9018-0242ac110004_0 ls -pal /mnt/nfs/nginx

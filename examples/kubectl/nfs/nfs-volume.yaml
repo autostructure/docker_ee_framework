@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: nfs-vol-001
   labels:
-    type: local
+    type: nfs
 spec:
   storageClassName: nfs-storage
   capacity:
@@ -15,7 +15,8 @@ spec:
     # - ReadOnlyMany
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle
-  hostPath:
-    path: /exports
+  nfs:
+    server: 10.0.65.68
+    path: /
 ---
 # add more volumes here...
