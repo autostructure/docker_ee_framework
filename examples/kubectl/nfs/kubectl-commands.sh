@@ -11,6 +11,12 @@ kubectl create -f nfs-server.yaml
 # pause
 # vi nfs-storage.yaml
 
+## TODO
+## CHANGE?!?!
+## change this to a nfs-volume.yaml template?
+## I think the nfs info now goes into the p-volume class
+echo "waiting for nfs server spin up.  Hit any key to continue."
+pause
 echo "Assigning nfs-server IP address to storageClass server parameter."
 # cp nfs-storage.yaml nfs-storage.yaml.template
 export POD_IP=`kubectl describe pod nfs-server | grep IP: | grep -oE '[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}'`
@@ -45,9 +51,9 @@ kubectl get svc nginx-service -o yaml | grep nodePort -C 5
 echo "Test the nginx install by returning a web page using the curl command."
 echo "You must use the InternalIP/ExternalIP and the nodePort"
 echo "e.g."
-echo "curl http://192.168.5.39:32781 -k"
+echo "curl http://192.168.5.24:33080 -k"
 
-# ssh worker004.autostructure.io
+# ssh worker002.autostructure.io
 # su
 # docker ps
-# docker container exec -it k8s_nginx_nginx-deployment-7fc7d55995-9zfsg_default_f120b2a0-ffee-11e8-9018-0242ac110004_0 ls -pal /mnt/nfs/nginx
+# docker container exec -it k8s_nginx_nginx-deployment-54f64d7b56-shmfh_default_b1adf1f9-0214-11e9-b608-0242ac110004_0 ls -pal /usr/share/nginx/html

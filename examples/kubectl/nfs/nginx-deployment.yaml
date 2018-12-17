@@ -27,4 +27,4 @@ spec:
               name: nginx-port
           volumeMounts:
             - name: nginx-nfs-vol-001
-              mountPath: /mnt/nfs/nginx
+              mountPath: /usr/share/nginx/html

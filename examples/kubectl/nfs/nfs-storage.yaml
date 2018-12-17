@@ -12,6 +12,9 @@ metadata:
     kubernetes.io/cluster-service: "true"
 provisioner: kubernetes.io/nfs
 reclaimPolicy: Retain
+# TODO
+# consider commenting out parameters...
+# had to enter them into persistent volumes (type nfs)
 parameters:
   path: /
   server: 10.0.65.68
