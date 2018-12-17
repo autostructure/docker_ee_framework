@@ -1,0 +1,19 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: RENAME_ME
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "RENAME_TO_STORAGE"
+  labels:
+    app: LABEL_ME
+spec:
+  storageClassName: RENAME_TO_STORAGECLASS
+  accessModes:
+    - ReadWriteMany
+    # - ReadWriteOnce
+    # - ReadOnlyMany
+    # - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi

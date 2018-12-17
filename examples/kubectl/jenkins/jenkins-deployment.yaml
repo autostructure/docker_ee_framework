@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: RENAME_ME
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      volumes:
+        - name: RENAME_ME
+          persistentVolumeClaim:
+            claimName: RENAME_ME_TO_CLAIM
+      containers:
+        - name: centos
+          image: nginx:1.15.4  (INSERT_CENTOS_IMAGE)
+          ports:
+            - containerPort: 8080 (JENKINS PORT?)
+              name: jenkins-port
+          volumeMounts:
+            - name: RENAME_ME
+              mountPath: /var/lib/jenkins

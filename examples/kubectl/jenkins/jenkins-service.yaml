@@ -1,0 +1,20 @@
+---
+# kubectl expose deployment/nginx-deployment
+# or...
+# kubectl create -f nginx-service.yaml
+# Valid nodePort rangesThe range of valid ports is 32768-35535
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+  labels:
+    app: jenkins
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 33333
+    protocol: TCP
+    name: http
+  selector:
+    app: jenkins
