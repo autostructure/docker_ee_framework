@@ -1,6 +1,4 @@
 ---
-# Note: first, replace "10.0.65.68" by running this command:
-# $ kubectl describe pod nfs-server | grep IP:
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
@@ -12,12 +10,3 @@ metadata:
     kubernetes.io/cluster-service: "true"
 provisioner: kubernetes.io/nfs
 reclaimPolicy: Retain
-# TODO
-# consider commenting out parameters...
-# had to enter them into persistent volumes (type nfs)
-parameters:
-  path: /
-  server: 10.0.65.68
-  # fsType: ext4
-  # Volume expansion not supported for nfs storage
-  # allowVolumeExpansion: true

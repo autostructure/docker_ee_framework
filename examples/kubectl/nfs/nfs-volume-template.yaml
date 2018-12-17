@@ -1,5 +1,5 @@
 ---
-# Note: first, replace "10.0.65.68" by running this command:
+# Note: first, replace "replace-with-nfs-server-pod-ip-address" by running this command:
 # $ kubectl describe pod nfs-server | grep IP:
 apiVersion: v1
 kind: PersistentVolume
@@ -18,7 +18,7 @@ spec:
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.0.65.68
+    server: replace-with-nfs-server-pod-ip-address
     path: /
 ---
 # add more volumes here...
