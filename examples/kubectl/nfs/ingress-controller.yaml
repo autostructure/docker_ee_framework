@@ -65,3 +65,70 @@ spec:
         args:
         - /ingress-controller
         - --default-backend-service=$(POD_NAMESPACE)/nginx-default-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: ingress-controller-service
+spec:
+  type: NodePort
+  selector:
+    app: ingress-nginx
+  ports:
+  - name: http
+    port: 80
+    nodePort: 33333
+  - name: https
+    port: 443
+    nodePort: 34443
+  - name: http-mgmt
+    port: 18080
+    nodePort: 34188
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: default
+  name: ingress-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ingress-nginx
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - image: gcr.io/google_containers/nginx-ingress-controller:0.9.0
+        name: ingress-controller
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+            name: http
+            protocol: TCP
+          - containerPort: 443
+            name: https
+            protocol: TCP
+          - containerPort: 18080
+            name: http-mgmt
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        args:
+        - /ingress-controller
+        - --default-backend-service=$(POD_NAMESPACE)/nginx-default-backend
