@@ -14,7 +14,24 @@ spec:
   type: NodePort
   ports:
   - port: 80
-    nodePort: 33080
+    nodePort: 33333
+    protocol: TCP
+    name: http
+  selector:
+    app: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: test-service
+  labels:
+    app: nginx
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 33333
     protocol: TCP
     name: http
   selector:

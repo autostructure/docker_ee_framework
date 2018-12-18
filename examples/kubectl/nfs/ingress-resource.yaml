@@ -9,10 +9,38 @@ spec:
   rules:
   - http:
       paths:
-      - path: /ingress-autostructure-dev
-        backend:
+      - backend:
           serviceName: nginx-service
           servicePort: 80
+  # - host: www.mysite.com
+  #   http:
+  #     paths:
+  #     - backend:
+  #         serviceName: website
+  #         servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: default
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: test-service
+          servicePort: 80
+  # - host: www.mysite.com
+  #   http:
+  #     paths:
+  #     - path: /website-subdir
+  #       backend:
+  #         serviceName: nginx-service
+  #         servicePort: 80
   # - host: www.mysite.com
   #   http:
   #     paths:
