@@ -8,7 +8,7 @@ metadata:
 spec:
   storageClassName: nfs-storage
   capacity:
-    storage: 20Gi
+    storage: 50Gi
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce

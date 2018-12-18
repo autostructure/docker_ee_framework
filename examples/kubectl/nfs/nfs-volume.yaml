@@ -1,9 +1,12 @@
 ---
-# The nfs ip address is from a container in the autostructure-development namespace.
+# PersistentVolumes don't use namespaces.
+# However, nfs runs in a container (with a namespace).
+# So, a separate PersistentVolume is necessary to point to
+# the nfs ip address in the autostructure-development namespace.
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-vol-autostructure-dev
+  name: nfs-vol-autostructure-development
   labels:
     type: nfs
 spec:

@@ -34,7 +34,7 @@ kubectl create -f nginx-deployment.yaml
 
 kubectl create -f nginx-service.yaml
 
-kubectl get storageclass
+kubectl get sc
 kubectl get pv
 kubectl get pvc
 kubectl get deployment
