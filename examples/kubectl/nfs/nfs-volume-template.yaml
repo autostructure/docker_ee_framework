@@ -10,7 +10,7 @@ metadata:
 spec:
   storageClassName: nfs-storage
   capacity:
-    storage: 20Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce
@@ -21,4 +21,22 @@ spec:
     server: replace-with-nfs-server-pod-ip-address
     path: /
 ---
-# add more volumes here...
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-vol-autostructure-development
+  labels:
+    type: nfs
+spec:
+  storageClassName: nfs-storage
+  capacity:
+    storage: 16Gi
+  accessModes:
+    - ReadWriteMany
+    # - ReadWriteOnce
+    # - ReadOnlyMany
+    # - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: replace-with-nfs-server-pod-ip-address
+    path: /

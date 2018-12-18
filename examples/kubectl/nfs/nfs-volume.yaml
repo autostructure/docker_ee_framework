@@ -3,6 +3,28 @@
 # However, nfs runs in a container (with a namespace).
 # So, a separate PersistentVolume is necessary to point to
 # the nfs ip address in the autostructure-development namespace.
+# The PersistentVolumeClaim wont care which volume it connects to,
+# as long as the volume satisfies the claim (e.g. does it have the space?)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-vol-default
+  labels:
+    type: nfs
+spec:
+  storageClassName: nfs-storage
+  capacity:
+    storage: 16Gi
+  accessModes:
+    - ReadWriteMany
+    # - ReadWriteOnce
+    # - ReadOnlyMany
+    # - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 10.0.65.68
+    path: /
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -12,7 +34,7 @@ metadata:
 spec:
   storageClassName: nfs-storage
   capacity:
-    storage: 20Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce
