@@ -24,5 +24,5 @@ echo "Ingress..."
 kubectl get ingress --namespace autostructure-development
 echo
 echo "Processes..."
-kubectl get po --namespace autostructure-development
+kubectl get po -o wide --all-namespaces
 echo
