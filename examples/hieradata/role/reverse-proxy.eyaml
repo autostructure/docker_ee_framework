@@ -1,0 +1,112 @@
+---
+# only included ucp-related settings and omitted the rest.
+# integrate these parameters settings into your reverse-proxy.eyaml
+profile::reverse_proxy::log_format:
+  upstream_log: '[$time_local] $remote_addr - $remote_user - $server_name  upstream: $upstream_addr upstream_response_time: $upstream_response_time msec: $msec request_time: $request_time request: $request'
+# using log format (above) for ucp logging in server section below. --jeff
+#profile::reverse_proxy::http_format_log: upstream_log
+profile::reverse_proxy::geo_mappings: {}
+profile::reverse_proxy::string_mappings: {}
+profile::reverse_proxy::nginx_locations: {}
+profile::reverse_proxy::nginx_mailhosts: {}
+profile::reverse_proxy::nginx_streamhosts: {}
+profile::reverse_proxy::nginx_upstreams:
+  ucp_autostructure_io_console:
+    members:
+      manager001.autostructure.io:
+        server: manager001.autostructure.io
+        port: 443
+      manager002.autostructure.io:
+        server: manager002.autostructure.io
+        port: 443
+      manager003.autostructure.io:
+        server: manager003.autostructure.io
+        port: 443
+  ucp_autostructure_io_kubectl:
+    members:
+      manager001.autostructure.io6443:
+        server: manager001.autostructure.io
+        port: 6443
+      manager002.autostructure.io6443:
+        server: manager002.autostructure.io
+        port: 6443
+      manager003.autostructure.io6443:
+        server: manager003.autostructure.io
+        port: 6443
+  worker_autostructure_io:
+    members:
+      worker001.autostructure.io:
+        server: worker001.autostructure.io
+      worker002.autostructure.io:
+        server: worker002.autostructure.io
+      worker003.autostructure.io:
+        server: worker003.autostructure.io
+      worker004.autostructure.io:
+        server: worker004.autostructure.io
+#   wildcard:
+#     members:
+#       worker001.autostructure.io:443:
+#         server: worker001.autostructure.io
+#         port:   443
+#       worker002.autostructure.io:443:
+#         server: worker002.autostructure.io
+#         port:   443
+#       worker003.autostructure.io:443:
+#         server: worker003.autostructure.io
+#         port:   443
+#       worker004.autostructure.io:443:
+#         server: worker004.autostructure.io
+#         port:   443
+#   ucp.autostructure.io:
+#     members:
+#       manager001.autostructure.io:443:
+#         server: manager001.autostructure.io
+#         port:   443
+#       manager002.autostructure.io:443:
+#         server: manager002.autostructure.io
+#         port:   443
+#       manager003.autostructure.io:443:
+#         server: manager003.autostructure.io
+#         port:   443
+
+profile::reverse_proxy::nginx_servers:
+  ucp.autostructure.io:
+    ensure: present
+    server_name:
+      - ucp.autostructure.io
+      - ucp
+    listen_port: 443
+    ssl_port: 443
+    ssl: true
+    proxy: https://ucp_autostructure_io_console
+    ssl_cert: /etc/ssl/certs/ssl-bundle.crt
+    ssl_key:  /etc/ssl/private/autostructure.io.key
+    ssl_cache: shared:SSL:1m
+    format_log: upstream_log
+  # ucp.autostructure.io kubectl:
+  #   ensure: present
+  #   server_name:
+  #     - ucp.autostructure.io
+  #     - ucp
+  #   listen_port: 6443
+  #   ssl_port: 6443
+  #   ssl: true
+  #   proxy: https://ucp_autostructure_io_kubectl
+  #   ssl_cert: /etc/ssl/certs/ssl-bundle.crt
+  #   ssl_key:  /etc/ssl/private/autostructure.io.key
+  #   ssl_cache: shared:SSL:1m
+  #   format_log: upstream_log
+  worker.autostructure.io:
+    ensure: present
+    proxy: http://worker_autostructure_io
+    format_log: upstream_log
+
+profile::reverse_proxy::nginx_servers_defaults: {}
+
+profile::reverse_proxy::ssl_cert: |
+  -----BEGIN CERTIFICATE-----
+  ...
+  -----END CERTIFICATE-----
+
+profile::reverse_proxy::ssl_key:  >
+  ENC[PKCS7...=]

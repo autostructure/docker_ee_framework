@@ -2,6 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
+  # namespace: autostructure-lab
   name: nfs-claim-3g
   annotations:
     volume.beta.kubernetes.io/storage-class: "nfs-storage"
