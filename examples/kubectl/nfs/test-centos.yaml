@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: test-centos
+  labels:
+    app: centos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: centos
+  template:
+    metadata:
+      labels:
+        app: centos
+    spec:
+      containers:
+        - name: centos
+          image: library/centos:latest
+          # need continuous running process or the container will close.
+          command: ["tailf"]
+          args: ["/dev/null"]
+          restartPolicy: OnFailure
