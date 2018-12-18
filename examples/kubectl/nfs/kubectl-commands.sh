@@ -1,8 +1,12 @@
-# First, designate a node to host nfs by assigning it a role.
+kubectl create -f namespaces.yaml
+
+# Designate a node to host nfs by assigning it a role.
 # This is used by the Deployment's nodeSelector
 # Run this command after replacing worker001 with your nfs node name...
-# kubectl label node worker001 node-role.kubernetes.io/nfs-server=nfs-server
+kubectl label node worker001 node-role.kubernetes.io/nfs-server=nfs-server
 
+# create nfs server containers for default & development namespaces...
+kubectl create -f nfs-server-default.yaml
 kubectl create -f nfs-server.yaml
 
 # echo "Open nfs-volume.yaml"

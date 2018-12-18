@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  # namespace: autostructure-lab
+  namespace: autostructure-development
   name: nginx-deployment
   labels:
     app: nginx

@@ -1,9 +1,8 @@
 ---
-# The nfs ip address is from a container in the autostructure-development namespace.
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-vol-autostructure-dev
+  name: nfs-vol-default
   labels:
     type: nfs
 spec:
@@ -17,5 +16,5 @@ spec:
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.0.65.70
+    server: 10.0.65.68
     path: /

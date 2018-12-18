@@ -6,7 +6,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  # namespace: autostructure-lab
+  namespace: autostructure-development
   name: nginx-service
   labels:
     app: nginx

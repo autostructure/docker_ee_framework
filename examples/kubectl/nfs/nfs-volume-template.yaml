@@ -4,8 +4,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # namespace: autostructure-lab
-  name: nfs-vol-001
+  name: nfs-vol-default
   labels:
     type: nfs
 spec:

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: autostructure-development
+  namespace: default
   name: nfs-server
   labels:
     role: nfs-server

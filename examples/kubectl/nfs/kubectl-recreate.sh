@@ -1,3 +1,4 @@
+#kubectl create -r namespaces.yaml
 #kubectl create -f nfs-server.yaml
 kubectl create -f nfs-storage.yaml
 kubectl create -f nfs-volume.yaml
