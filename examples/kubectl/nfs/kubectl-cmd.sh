@@ -62,3 +62,8 @@ echo "curl http://192.168.5.24:33080 -k"
 # docker container exec -it k8s_nginx_nginx-deployment-54f64d7b56-7wdkz_default_7f59b31a-021d-11e9-b608-0242ac110004_0 ls -pal /usr/share/nginx/html
 # docker container exec -it k8s_nfs-server_nfs-server_default_b8027b81-ffe9-11e8-9018-0242ac110004_0 ls -pal /exports
 # docker container exec -it k8s_nfs-server_nfs-server_default_b8027b81-ffe9-11e8-9018-0242ac110004_0 /bin/bash
+#
+# Run command in existing pod (1 container case)
+kubectl exec my-pod -- /bin/bash
+# Run command in existing pod (multi-container case)
+kubectl exec my-pod -c my-container -- /bin/bash

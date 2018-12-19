@@ -8,8 +8,6 @@ kind: Service
 metadata:
   namespace: default
   name: test-service
-  labels:
-    app: nginx
 spec:
   type: NodePort
   ports:
@@ -25,8 +23,6 @@ kind: Service
 metadata:
   namespace: autostructure-development
   name: nginx-service
-  labels:
-    app: nginx
 spec:
   type: NodePort
   ports:

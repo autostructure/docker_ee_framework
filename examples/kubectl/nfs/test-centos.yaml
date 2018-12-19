@@ -19,7 +19,12 @@ spec:
       containers:
         - name: centos
           image: library/centos:latest
+          restartPolicy: Never
+          command: ["sleep","360"]
           # need continuous running process or the container will close.
-          command: ["tailf"]
-          args: ["/dev/null"]
-          restartPolicy: OnFailure
+          # command:
+          #   - "sleep"
+          #   - "360"
+          # OR...
+          # command: ["tailf"]
+          # args: ["/dev/null"]
