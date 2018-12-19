@@ -9,3 +9,7 @@ profile::nfs_server::nfs_server_mount_root: /nfs-share
 profile::nfs_server::nfs_server_mount_parents:
   - /nfs-share
   - /nfs-share/docker-workers
+
+profile::nfs_server::docker_ee_url: https://storebits.docker.com/ee/centos/sub-d0519671-678e-4e17-9f95-652215c673ab/centos/7/x86_64/stable,
+profile::nfs_server::docker_ee_key_source: https://storebits.docker.com/ee/centos/sub-d0519671-678e-4e17-9f95-652215c673ab/centos/gpg,
+profile::nfs_server::docker_image: docker/ucp:3.1.0

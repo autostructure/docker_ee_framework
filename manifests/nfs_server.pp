@@ -64,4 +64,26 @@ class docker_ucp::nfs_server(
     hasrestart => true,
     restart    => 'systemctl restart nfs',
   }
+
+  #
+  # make nfs node a docker worker node as well as a host for nfs...
+
+  # docker image pull docker/ucp:3.1.0
+  docker::image { $docker_image: }
+
+  class { '::docker':
+    docker_ee                 => true,
+    docker_ee_source_location => $docker_ee_url,
+    docker_ee_key_source      => $docker_ee_key_source,
+  }
+
+  class { '::harden_docker':
+    restrict_network_traffic_between_containers => false,
+    disable_userland_proxy                      => false,
+    enable_live_restore                         => false,
+  }
+
+  Class['::docker']
+  -> Class['::docker_ucp::docker_ucp_mount_nfs']
+  -> Class['::harden_docker']
 }
