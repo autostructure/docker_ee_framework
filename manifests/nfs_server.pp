@@ -92,6 +92,5 @@ class docker_ee_framework::nfs_server(
   }
 
   Class['::docker']
-  -> Class['::docker_ucp::docker_ucp_mount_nfs']
   -> Class['::harden_docker']
 }
