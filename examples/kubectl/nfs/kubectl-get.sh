@@ -1,6 +1,9 @@
 #!/bin/sh
 
 clear
+echo "Processes..."
+kubectl get po -o wide --all-namespaces
+echo
 echo "Nodes..."
 kubectl get nodes
 echo
@@ -8,23 +11,20 @@ echo "PersistentVolumes..."
 kubectl get pv
 echo
 echo "StorageClasses..."
-kubectl get sc --namespace autostructure-development
+kubectl get sc
 echo
 echo "PersistentVolumeClaims..."
-kubectl get pvc --namespace autostructure-development
+kubectl get pvc --all-namespaces
 echo
 echo "Pods..."
-kubectl get pods -o wide --namespace autostructure-development
+kubectl get pods -o wide --all-namespaces
 echo
 echo "Deployments..."
-kubectl get deployment --namespace autostructure-development
+kubectl get deployment --all-namespaces
 echo
 echo "Services..."
-kubectl get svc --namespace autostructure-development
+kubectl get svc --all-namespaces
 echo
 echo "Ingress..."
-kubectl get ingress --namespace autostructure-development
-echo
-echo "Processes..."
-kubectl get po -o wide --all-namespaces
+kubectl get ingress --all-namespaces
 echo

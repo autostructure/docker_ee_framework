@@ -1,29 +1,11 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  namespace: autostructure-development
-  name: nginx-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-  - http:
-      paths:
-      - backend:
-          serviceName: nginx-service
-          servicePort: 80
-  # - host: www.mysite.com
-  #   http:
-  #     paths:
-  #     - backend:
-  #         serviceName: website
-  #         servicePort: 80
 ---
+# create an ingress-resource in both the
+# default & autostructure-development namespaces.
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   namespace: default
-  name: nginx-ingress
+  name: nginx-ingress-resource
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -33,6 +15,21 @@ spec:
       - path: /
         backend:
           serviceName: test-service
+          servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: autostructure-development
+  name: nginx-ingress-resource
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: nginx-service
           servicePort: 80
   # - host: www.mysite.com
   #   http:

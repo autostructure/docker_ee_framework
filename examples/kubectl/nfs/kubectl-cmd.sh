@@ -36,19 +36,20 @@ kubectl create -f nginx-service.yaml
 #kubectl create -f ingress-controller.yaml
 #kubectl create -f ingress-default-backend.yaml
 
+kubectl get po --all-namespaces
 kubectl get nodes
 kubectl get sc
 kubectl get pv
 kubectl get pvc --all-namespaces
+kubectl get pods -l -o wide --all-namespaces #app=nginx
 kubectl get deployment --all-namespaces
 kubectl get svc --all-namespaces
-kubectl get pods -l -o wide --all-namespaces #app=nginx
+kubectl get ingress --all-namespaces
 echo
 echo "ip address and port info for testing nginx deployments..."
 kubectl get nodes -o yaml | grep ExternalIP -C 1
 kubectl get nodes -o yaml | grep InternalIP -C 1
 kubectl get svc nginx-service -o yaml | grep nodePort -C 5
-kubectl get po --all-namespaces
 
 echo "Test the nginx install by returning a web page using the curl command."
 echo "You must use the InternalIP/ExternalIP and the nodePort"

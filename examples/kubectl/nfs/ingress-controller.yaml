@@ -1,13 +1,15 @@
 ---
+# create an ingress-controller in both the
+# default & autostructure-development namespaces.
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: autostructure-development
-  name: ingress-controller-service
+  namespace: default
+  name: nginx-ingress-controller-service
 spec:
   type: NodePort
   selector:
-    app: ingress-nginx
+    app: nginx-ingress
   ports:
   - name: http
     port: 80
@@ -22,19 +24,19 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  namespace: autostructure-development
-  name: ingress-controller
+  namespace: default
+  name: nginx-ingress-controller
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: ingress-nginx
+        app: inginx-ingress
     spec:
       terminationGracePeriodSeconds: 60
       containers:
       - image: gcr.io/google_containers/nginx-ingress-controller:0.9.0
-        name: ingress-controller
+        name: nginx-ingress-controller
         imagePullPolicy: Always
         ports:
           - containerPort: 80
@@ -64,17 +66,17 @@ spec:
                 fieldPath: metadata.namespace
         args:
         - /ingress-controller
-        - --default-backend-service=$(POD_NAMESPACE)/nginx-default-backend
+        - --default-backend-service=$(POD_NAMESPACE)/nginx-ingress-default-backend
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
-  name: ingress-controller-service
+  namespace: autostructure-development
+  name: nginx-ingress-controller-service
 spec:
   type: NodePort
   selector:
-    app: ingress-nginx
+    app: nginx-ingress
   ports:
   - name: http
     port: 80
@@ -89,19 +91,19 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  namespace: default
-  name: ingress-controller
+  namespace: autostructure-development
+  name: nginx-ingress-controller
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: ingress-nginx
+        app: nginx-ingress
     spec:
       terminationGracePeriodSeconds: 60
       containers:
       - image: gcr.io/google_containers/nginx-ingress-controller:0.9.0
-        name: ingress-controller
+        name: nginx-ingress-controller
         imagePullPolicy: Always
         ports:
           - containerPort: 80
@@ -131,4 +133,4 @@ spec:
                 fieldPath: metadata.namespace
         args:
         - /ingress-controller
-        - --default-backend-service=$(POD_NAMESPACE)/nginx-default-backend
+        - --default-backend-service=$(POD_NAMESPACE)/nginx-ingress-default-backend

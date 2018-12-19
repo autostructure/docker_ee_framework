@@ -1,4 +1,5 @@
 ---
+# ability to deploy separate nfs nodes for each project or environment...
 apiVersion: v1
 kind: Pod
 metadata:

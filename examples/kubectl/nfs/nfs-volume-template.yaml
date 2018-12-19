@@ -1,6 +1,15 @@
 ---
-# Note: first, replace "replace-with-nfs-server-pod-ip-address" by running this command:
+# Note:
+# First, replace "replace-with-nfs-server-pod-ip-address"
+# by running this command:
 # $ kubectl describe pod nfs-server | grep IP:
+#
+# PersistentVolumes don't use namespaces.
+# However, nfs runs in a container (with a namespace).
+# So, a separate PersistentVolume is necessary to point to
+# the nfs ip address in the autostructure-development namespace.
+# The PersistentVolumeClaim wont care which volume it connects to,
+# as long as the volume satisfies the claim (e.g. does it have the space?)
 apiVersion: v1
 kind: PersistentVolume
 metadata:
