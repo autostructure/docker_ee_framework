@@ -13,13 +13,13 @@ spec:
   ports:
   - name: http
     port: 80
-    nodePort: 80
+    nodePort: 34080
   - name: https
     port: 443
-    nodePort: 443
+    nodePort: 34443
   - name: http-mgmt
     port: 18080
-    nodePort: 18080
+    nodePort: 34188
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -80,13 +80,13 @@ spec:
   ports:
   - name: http
     port: 80
-    nodePort: 80
+    nodePort: 35080
   - name: https
     port: 443
-    nodePort: 443
+    nodePort: 35443
   - name: http-mgmt
     port: 18080
-    nodePort: 18080
+    nodePort: 35188
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
