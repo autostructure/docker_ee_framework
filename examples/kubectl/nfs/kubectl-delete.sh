@@ -1,3 +1,5 @@
+#!/bin/sh
+
 kubectl delete svc nginx-service --namespace autostructure-development
 kubectl delete deployment nginx-deployment --namespace autostructure-development
 kubectl delete pvc nfs-claim-3g --namespace autostructure-development

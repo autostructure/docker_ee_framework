@@ -1,3 +1,5 @@
+#!/bin/sh
+
 clear
 echo "Nodes..."
 kubectl get nodes
