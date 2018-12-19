@@ -9,9 +9,12 @@
 # exported File & File_line resources...
 
 class docker_ee_framework::nfs_server(
-  Array  $nfs_server_mount_parents,
-  String $nfs_server_mount_root,
-  String $nfs_server_mount,
+  Stdlib::Httpurl $docker_ee_url,
+  Stdlib::Httpurl $docker_ee_key_source,
+  String          $docker_image = 'docker/ucp:3.1.0',
+  Array           $nfs_server_mount_parents,
+  String          $nfs_server_mount_root,
+  String          $nfs_server_mount,
 ) {
 
   package { 'nfs-utils':
