@@ -1,8 +1,8 @@
 resource "vsphere_virtual_machine" "nfs" {
-  name             = "nfs"
+  name             = "nfs001"
   resource_pool_id = "${vsphere_resource_pool.docker_ee_pool.id}"
   datastore_id     = "${data.vsphere_datastore.DS0.id}"
-  memory           = 4096
+  memory           = 8192
   guest_id         = "centos7_64Guest"
 
   wait_for_guest_net_timeout = "${var.timeout_minutes}"
@@ -14,7 +14,7 @@ resource "vsphere_virtual_machine" "nfs" {
 
   disk {
     label            = "disk0"
-    size             = 32
+    size             = 128
     thin_provisioned = true
   }
 
@@ -23,7 +23,7 @@ resource "vsphere_virtual_machine" "nfs" {
 
     customize {
       linux_options {
-        host_name = "nfs"
+        host_name = "nfs001"
         domain    = "autostructure.io"
       }
       network_interface {}
