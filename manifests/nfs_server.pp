@@ -1,9 +1,14 @@
 # nfs_server.pp
 #
+# Create dual role node:  nfs-server & docker-worker
+#
 # The nfs-client CLI command to test mounting...
 # $ showmount -e <nfs-server-hostname-or-ip>
-#
 
+# NOTE:
+# I was using exported resources but not now.
+# Keep note below in case it is implemented again.
+#
 # Class before moving to a single shared directory.
 # Below (and in docker_ucp_mount_nfs.pp) are
 # exported File & File_line resources...
