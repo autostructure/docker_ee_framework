@@ -12,10 +12,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /test-ingress
         backend:
           serviceName: test-service
-          servicePort: 80
+          servicePort: 33380
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -28,9 +28,10 @@ spec:
   rules:
   - http:
       paths:
-      - backend:
+      - path: /test-ingress
+        backend:
           serviceName: nginx-service
-          servicePort: 80
+          servicePort: 32880
   # - host: www.mysite.com
   #   http:
   #     paths:

@@ -49,7 +49,8 @@ echo
 echo "ip address and port info for testing nginx deployments..."
 kubectl get nodes -o yaml | grep ExternalIP -C 1
 kubectl get nodes -o yaml | grep InternalIP -C 1
-kubectl get svc nginx-service -o yaml | grep nodePort -C 5
+kubectl get svc test-service -o yaml | grep nodePort -C 5
+kubectl get svc nginx-service -o yaml --namespace=autostructure-development | grep nodePort -C 5
 
 echo "Test the nginx install by returning a web page using the curl command."
 echo "You must use the InternalIP/ExternalIP and the nodePort"

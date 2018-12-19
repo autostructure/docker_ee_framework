@@ -3,18 +3,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: autostructure-development
-  name: nginx-deployment
+  name: test-nginx-ingress
   labels:
-    app: nginx
+    app: test-nginx-ingress
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: test-nginx-ingress
   template:
     metadata:
       labels:
-        app: nginx
+        app: test-nginx-ingress
     spec:
       volumes:
         - name: nginx-nfs-vol-001
@@ -34,18 +34,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
-  name: test-nginx-ingress-deployment
+  name: test-nginx-ingress
   labels:
-    app: nginx
+    app: test-nginx-ingress
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: test-nginx-ingress
   template:
     metadata:
       labels:
-        app: nginx
+        app: test-nginx-ingress
     spec:
       volumes:
         - name: nginx-nfs-vol-001

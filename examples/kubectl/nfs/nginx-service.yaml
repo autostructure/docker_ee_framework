@@ -12,23 +12,38 @@ spec:
   type: NodePort
   ports:
   - port: 80
-    nodePort: 33333
+    nodePort: 33380
     protocol: TCP
     name: http
   selector:
-    app: nginx
+    app: test-nginx-ingress
 ---
 apiVersion: v1
 kind: Service
 metadata:
   namespace: autostructure-development
-  name: nginx-service
+  name: test-service
 spec:
   type: NodePort
   ports:
   - port: 80
-    nodePort: 33333
+    nodePort: 32880
     protocol: TCP
     name: http
   selector:
-    app: nginx
+    app: test-nginx-ingress
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   namespace: autostructure-development
+#   name: test-service
+# spec:
+#   type: NodePort
+#   ports:
+#   - port: 80
+#     nodePort: 32880
+#     protocol: TCP
+#     name: http
+#   selector:
+#     app: test-nginx-ingress

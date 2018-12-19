@@ -3,6 +3,9 @@
 # default & autostructure-development namespaces.
 # the backend is used by the nginx controller implementation
 # to display 404 errors.
+# The default backend needs to satisfy the following two requirements:
+# serves a 404 page at /
+# serves 200 on a /healthz
 kind: Service
 apiVersion: v1
 metadata:
@@ -34,7 +37,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8080
+            port: 80
             scheme: HTTP
           initialDelaySeconds: 30
           timeoutSeconds: 5
@@ -47,7 +50,7 @@ spec:
             memory: 20Mi
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 80
           protocol: TCP
 ---
 kind: Service
@@ -81,7 +84,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8080
+            port: 80
             scheme: HTTP
           initialDelaySeconds: 30
           timeoutSeconds: 5
@@ -94,5 +97,5 @@ spec:
             memory: 20Mi
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 80
           protocol: TCP
