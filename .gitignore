@@ -2,7 +2,9 @@
 .metadata
 .yardoc
 .yardwarns
+.DS_Store
 *.iml
+*.log
 /.bundle/
 /.idea/
 /.vagrant/
@@ -19,4 +21,5 @@
 /tmp/
 /vendor/
 /convert_report.txt
-.DS_Store
+*.tfstate
+examples/terraform/.terraform/plugins
