@@ -1,6 +1,7 @@
 ---
 # Note:
 # First, replace "{{nfs-server-ip-address}}"
+# And, replace "{{autostructure-development-nfs-server-ip-address}}"
 # by running this command:
 # $ kubectl describe pod nfs-server | grep IP:
 #
@@ -47,5 +48,5 @@ spec:
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: {{nfs-server-ip-address}}
+    server: {{autostructure-development-nfs-server-ip-address}}
     path: /

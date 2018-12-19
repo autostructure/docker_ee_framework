@@ -8,9 +8,9 @@ kubectl create -f nfs-volume.yaml
 kubectl create -f nfs-claim.yaml
 kubectl create -f nginx-deployment.yaml
 kubectl create -f nginx-service.yaml
-#kubectl create -f ingress-resource.yaml
-#kubectl create -f ingress-controller.yaml
-#kubectl create -f ingress-default-backend.yaml
+kubectl create -f ingress-resource.yaml
+kubectl create -f ingress-controller.yaml
+kubectl create -f ingress-default-backend.yaml
 
 
 
