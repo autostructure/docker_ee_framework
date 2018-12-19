@@ -5,7 +5,7 @@ echo "Processes..."
 kubectl get po -o wide --all-namespaces
 echo
 echo "Nodes..."
-kubectl get nodes
+kubectl get nodes --show-labels
 echo
 echo "PersistentVolumes..."
 kubectl get pv

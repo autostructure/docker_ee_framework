@@ -25,8 +25,8 @@
 # pause
 
 kubectl create -r namespaces.yaml
-kubectl create -f nfs-server.yaml
 kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
+kubectl create -f nfs-server.yaml
 kubectl create -f nfs-storage.yaml
 kubectl create -f nfs-volume.yaml
 kubectl create -f nfs-claim.yaml
@@ -37,7 +37,7 @@ kubectl create -f nginx-service.yaml
 #kubectl create -f ingress-default-backend.yaml
 
 kubectl get po --all-namespaces
-kubectl get nodes
+kubectl get nodes --show-labels
 kubectl get sc
 kubectl get pv
 kubectl get pvc --all-namespaces
