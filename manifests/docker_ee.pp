@@ -1,7 +1,7 @@
 # docker_ee.pp
 # Installs the Docker EE on a virtual machine.
 #
-class docker_ucp::docker_ee(
+class docker_ee_framework::docker_ee(
   Stdlib::Httpurl $docker_ee_url,
   Stdlib::Httpurl $docker_ee_key_source,
 ) {

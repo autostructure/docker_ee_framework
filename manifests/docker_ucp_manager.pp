@@ -14,7 +14,7 @@
 #
 # Use the docker_ucp Puppet Tasks to retrieve tokens and join clusters.
 #
-class docker_ucp::docker_ucp_manager (
+class docker_ee_framework::docker_ucp_manager (
   Stdlib::Httpurl $docker_ee_url,
   Stdlib::Httpurl $docker_ee_key_source,
   String          $docker_image = 'docker/ucp:3.1.0',

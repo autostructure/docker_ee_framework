@@ -8,7 +8,7 @@
 # Below (and in docker_ucp_mount_nfs.pp) are
 # exported File & File_line resources...
 
-class docker_ucp::nfs_server(
+class docker_ee_framework::nfs_server(
   Array  $nfs_server_mount_parents,
   String $nfs_server_mount_root,
   String $nfs_server_mount,
