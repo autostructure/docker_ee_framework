@@ -1,12 +1,12 @@
 {
-  "name": "autostructure-docker_ucp",
+  "name": "autostructure-docker_ee_framework",
   "version": "0.1.0",
   "author": "Jeffrey Frelick",
-  "summary": "The docker_ucp module helps setup Docker UCP in the control-repo",
+  "summary": "The docker_ee_framework module automates setup of a Docker UCP environment upon VMware vSphere nodes.",
   "license": "Apache-2.0",
-  "source": "https://github.com/autostructure/docker_ucp.git",
-  "project_page": "https://github.com/autostructure/docker_ucp",
-  "issues_url": "https://github.com/autostructure/docker_ucp/issues",
+  "source": "https://github.com/autostructure/docker_ee_framework.git",
+  "project_page": "https://github.com/autostructure/docker_ee_framework",
+  "issues_url": "https://github.com/autostructure/docker_ee_framework/issues",
   "dependencies": [
     {
       "name": "puppetlabs-docker",
