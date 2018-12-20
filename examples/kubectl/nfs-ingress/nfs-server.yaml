@@ -16,16 +16,23 @@ spec:
   - key: node-role.kubernetes.io/nfs-server
     effect: NoSchedule
   restartPolicy: Always
+  volumes:
+  - name: export-volume
+    hostPath:
+      path: /tmp/nfs-provisioner
   containers:
   - name: nfs-server
-    image: gcr.io/google_containers/volume-nfs:0.8
-    # image: quay.io/kubernetes_incubator/nfs-provisioner
+    image: quay.io/kubernetes_incubator/nfs-provisioner
+    # image: gcr.io/google_containers/volume-nfs:0.8
     securityContext:
       privileged: true
     ports:
       - name: nfs-0
         containerPort: 2049
         protocol: TCP
+    volumeMounts:
+      - name: export-volume
+        mountPath: /export
   nodeSelector:
     node-role.kubernetes.io/nfs-server: "nfs-server"
 ---
@@ -43,8 +50,8 @@ spec:
   restartPolicy: Always
   containers:
   - name: nfs-server
-    image: gcr.io/google_containers/volume-nfs:0.8
-    # image: quay.io/kubernetes_incubator/nfs-provisioner
+    image: quay.io/kubernetes_incubator/nfs-provisioner
+    # image: gcr.io/google_containers/volume-nfs:0.8
     securityContext:
       privileged: true
     ports:
