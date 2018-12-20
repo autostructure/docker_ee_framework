@@ -17,18 +17,82 @@
 #
 # @See https://github.com/kubernetes/kubernetes/issues/52787
 #
-# apiVersion: v1
-# kind: Pod
+kind: Pod
+apiVersion: v1
+metadata:
+  namespace: autostructure-development
+  name: nfs-server
+  labels:
+    role: nfs-server
+spec:
+  volumes:
+    - name: nfs-export-volume
+      hostPath:
+        path: /srv/nfs-provisioner/autostructure-development/nfs-server
+  containers:
+    - name: nfs-provisioner
+      image: quay.io/kubernetes_incubator/nfs-provisioner:v1.0.8
+      ports:
+        - name: nfs
+          containerPort: 2049
+          protocol: TCP
+        - name: mountd
+          containerPort: 20048
+        - name: rpcbind
+          containerPort: 111
+        - name: rpcbind-udp
+          containerPort: 111
+          protocol: UDP
+      securityContext:
+        capabilities:
+          add:
+            - DAC_READ_SEARCH
+      args:
+        - "-provisioner=autostructure.io/nfs-storage"
+        - "-grace-period=0"
+      env:
+        - name: NFS_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: NFS_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SERVICE_NAME
+          value: nfs-server
+      imagePullPolicy: "IfNotPresent"
+      volumeMounts:
+        - name: nfs-export-volume
+          mountPath: /export
+  nodeSelector:
+    node-role.kubernetes.io/nfs-server: "nfs-server"
+
+
+
+# kind: Deployment
+# apiVersion: extensions/v1beta1
 # metadata:
 #   namespace: default
 #   name: nfs-server
 #   labels:
 #     role: nfs-server
 # spec:
-#   tolerations:
-#   - key: node-role.kubernetes.io/nfs-server
-#     effect: NoSchedule
-#   restartPolicy: Always
+#   replicas: 1
+#   strategy:
+#     type: Recreate
+#   template:
+#     metadata:
+#       labels:
+#         app: nfs-server
 #   volumes:
 #     - name: nfs-export-volume
 #       hostPath:
@@ -56,7 +120,7 @@
 #               - DAC_READ_SEARCH
 #               - SYS_RESOURCE
 #       args:
-#         - "-provisioner=autostructure-development/nfs-storage"
+#         - "-provisioner=autostructure.io/nfs-storage"
 #       env:
 #         - name: NFS_NODE_NAME
 #           valueFrom:
@@ -83,68 +147,71 @@
 #   nodeSelector:
 #     node-role.kubernetes.io/nfs-server: "nfs-server"
 # ---
-apiVersion: v1
-kind: Pod
-metadata:
-  namespace: autostructure-development
-  name: nfs-server
-  labels:
-    role: nfs-server
-spec:
-  tolerations:
-  - key: node-role.kubernetes.io/nfs-server
-    effect: NoSchedule
-  restartPolicy: Always
-  volumes:
-    - name: nfs-export-volume
-      hostPath:
-        path: /srv/nfs-provisioner/autostructure-development/nfs-server
-        # path: /srv/nfs-provisioner/$POD_NAMESPACE/$NFS_POD_NAME
-  containers:
-    - name: nfs-server
-      image: quay.io/kubernetes_incubator/nfs-provisioner
-      # image: gcr.io/google_containers/volume-nfs:0.8
-      ports:
-        - name: nfs
-          containerPort: 2049
-          protocol: TCP
-        - name: mountd
-          containerPort: 20048
-        - name: rpcbind
-          containerPort: 111
-        - name: rpcbind-udp
-          containerPort: 111
-          protocol: UDP
-      securityContext:
-        - privileged: true
-          capabilities:
-            add:
-              - DAC_READ_SEARCH
-              - SYS_RESOURCE
-      args:
-        - "-provisioner=autostructure-development/nfs-storage"
-      env:
-        - name: NFS_NODE_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: spec.nodeName
-        - name: NFS_POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: SERVICE_NAME
-          value: nfs-server
-      imagePullPolicy: "IfNotPresent"
-      volumeMounts:
-      - name: nfs-export-volume
-        mountPath: /export
-  nodeSelector:
-    node-role.kubernetes.io/nfs-server: "nfs-server"
+# kind: Deployment
+# apiVersion: extensions/v1beta1
+# metadata:
+#   namespace: autostructure-development
+#   name: nfs-server
+#   labels:
+#     role: nfs-server
+# spec:
+#   replicas: 1
+#   strategy:
+#     type: Recreate
+#   template:
+#     metadata:
+#       labels:
+#         app: nfs-server
+#   volumes:
+#     - name: nfs-export-volume
+#       hostPath:
+#         path: /srv/nfs-provisioner/autostructure-development/nfs-server
+#         # path: /srv/nfs-provisioner/$POD_NAMESPACE/$NFS_POD_NAME
+#   containers:
+#     - name: nfs-server
+#       image: quay.io/kubernetes_incubator/nfs-provisioner
+#       # image: gcr.io/google_containers/volume-nfs:0.8
+#       ports:
+#         - name: nfs
+#           containerPort: 2049
+#           protocol: TCP
+#         - name: mountd
+#           containerPort: 20048
+#         - name: rpcbind
+#           containerPort: 111
+#         - name: rpcbind-udp
+#           containerPort: 111
+#           protocol: UDP
+#       securityContext:
+#         - privileged: true
+#           capabilities:
+#             add:
+#               - DAC_READ_SEARCH
+#               - SYS_RESOURCE
+#       args:
+#         - "-provisioner=autostructure.io/nfs-storage"
+#       env:
+#         - name: NFS_NODE_NAME
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: spec.nodeName
+#         - name: NFS_POD_NAME
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: metadata.name
+#         - name: POD_IP
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: status.podIP
+#         - name: POD_NAMESPACE
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: metadata.namespace
+#         - name: SERVICE_NAME
+#           value: nfs-server
+#       imagePullPolicy: "IfNotPresent"
+#       volumeMounts:
+#       - name: nfs-export-volume
+#         mountPath: /export
+#   nodeSelector:
+#     node-role.kubernetes.io/nfs-server: "nfs-server"

@@ -5,11 +5,8 @@ metadata:
   namespace: default
   name: nfs-claim-1g
   annotations:
-    volume.beta.kubernetes.io/storage-class: "nfs-storage"
-  labels:
-    app: nginx
+    volume.beta.kubernetes.io/storage-class: "autostructure.io/nfs-storage"
 spec:
-  storageClassName: nfs-storage
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce
@@ -25,11 +22,8 @@ metadata:
   namespace: autostructure-development
   name: nfs-claim-3g
   annotations:
-    volume.beta.kubernetes.io/storage-class: "nfs-storage"
-  labels:
-    app: nginx
+    volume.beta.kubernetes.io/storage-class: "autostructure.io/nfs-storage"
 spec:
-  storageClassName: nfs-storage
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce
