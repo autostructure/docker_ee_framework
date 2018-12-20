@@ -30,8 +30,8 @@ kubectl create -f nfs-server.yaml
 kubectl create -f nfs-storage.yaml
 kubectl create -f nfs-volume.yaml
 kubectl create -f nfs-claim.yaml
-kubectl create -f nginx-deployment.yaml
-kubectl create -f nginx-service.yaml
+kubectl create -f nginx-webserver-deployment.yaml
+kubectl create -f nginx-webserver-service.yaml
 #kubectl create -f ingress-resource.yaml
 #kubectl create -f ingress-controller.yaml
 #kubectl create -f ingress-default-backend.yaml
@@ -50,7 +50,7 @@ echo "ip address and port info for testing nginx deployments..."
 kubectl get nodes -o yaml | grep ExternalIP -C 1
 kubectl get nodes -o yaml | grep InternalIP -C 1
 kubectl get svc test-service -o yaml | grep nodePort -C 5
-kubectl get svc nginx-service -o yaml --namespace=autostructure-development | grep nodePort -C 5
+kubectl get svc test-service -o yaml --namespace=autostructure-development | grep nodePort -C 5
 
 echo "Test the nginx install by returning a web page using the curl command."
 echo "You must use the InternalIP/ExternalIP and the nodePort"

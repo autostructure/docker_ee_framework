@@ -4,38 +4,85 @@
 # e.g.
 # kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
 #
-apiVersion: v1
-kind: Pod
-metadata:
-  namespace: default
-  name: nfs-server
-  labels:
-    role: nfs-server
-spec:
-  tolerations:
-  - key: node-role.kubernetes.io/nfs-server
-    effect: NoSchedule
-  restartPolicy: Always
-  volumes:
-  - name: export-volume
-    hostPath:
-      path: /tmp/nfs-provisioner
-  containers:
-  - name: nfs-server
-    image: quay.io/kubernetes_incubator/nfs-provisioner
-    # image: gcr.io/google_containers/volume-nfs:0.8
-    securityContext:
-      privileged: true
-    ports:
-      - name: nfs-0
-        containerPort: 2049
-        protocol: TCP
-    volumeMounts:
-      - name: export-volume
-        mountPath: /export
-  nodeSelector:
-    node-role.kubernetes.io/nfs-server: "nfs-server"
----
+# To check the hostPath mounting, open a shell on the nfs container...
+# Run command in existing pod (1 container case)
+# $ kubectl exec nfs-pod -- /bin/bash
+# Run command in existing pod (multi-container case)
+# $ kubectl exec nfs-pod -c nfs-container -- /bin/bash
+#
+# @mahdix kubectl create command now just add image, because we want it enough simple.
+# but now 1.8 support kubectl set env command.
+# You can use:
+# $ kubectl create deploy a --image=xxx --dry-run -o yaml | kubectl set env --local -f - 'env=prod' -o yaml . hope this can help you
+#
+# @See https://github.com/kubernetes/kubernetes/issues/52787
+#
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   namespace: default
+#   name: nfs-server
+#   labels:
+#     role: nfs-server
+# spec:
+#   tolerations:
+#   - key: node-role.kubernetes.io/nfs-server
+#     effect: NoSchedule
+#   restartPolicy: Always
+#   volumes:
+#     - name: nfs-export-volume
+#       hostPath:
+#         path: /srv/nfs-provisioner/default/nfs-server
+#         # path: /srv/nfs-provisioner/$POD_NAMESPACE/$NFS_POD_NAME
+#   containers:
+#     - name: nfs-server
+#       image: quay.io/kubernetes_incubator/nfs-provisioner
+#       # image: gcr.io/google_containers/volume-nfs:0.8
+#       ports:
+#         - name: nfs
+#           containerPort: 2049
+#           protocol: TCP
+#         - name: mountd
+#           containerPort: 20048
+#         - name: rpcbind
+#           containerPort: 111
+#         - name: rpcbind-udp
+#           containerPort: 111
+#           protocol: UDP
+#       securityContext:
+#         - privileged: true
+#           capabilities:
+#             add:
+#               - DAC_READ_SEARCH
+#               - SYS_RESOURCE
+#       args:
+#         - "-provisioner=autostructure-development/nfs-storage"
+#       env:
+#         - name: NFS_NODE_NAME
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: spec.nodeName
+#         - name: NFS_POD_NAME
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: metadata.name
+#         - name: POD_IP
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: status.podIP
+#         - name: POD_NAMESPACE
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: metadata.namespace
+#         - name: SERVICE_NAME
+#           value: nfs-server
+#       imagePullPolicy: "IfNotPresent"
+#       volumeMounts:
+#       - name: nfs-export-volume
+#         mountPath: /export
+#   nodeSelector:
+#     node-role.kubernetes.io/nfs-server: "nfs-server"
+# ---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -48,15 +95,56 @@ spec:
   - key: node-role.kubernetes.io/nfs-server
     effect: NoSchedule
   restartPolicy: Always
+  volumes:
+    - name: nfs-export-volume
+      hostPath:
+        path: /srv/nfs-provisioner/autostructure-development/nfs-server
+        # path: /srv/nfs-provisioner/$POD_NAMESPACE/$NFS_POD_NAME
   containers:
-  - name: nfs-server
-    image: quay.io/kubernetes_incubator/nfs-provisioner
-    # image: gcr.io/google_containers/volume-nfs:0.8
-    securityContext:
-      privileged: true
-    ports:
-      - name: nfs-0
-        containerPort: 2049
-        protocol: TCP
+    - name: nfs-server
+      image: quay.io/kubernetes_incubator/nfs-provisioner
+      # image: gcr.io/google_containers/volume-nfs:0.8
+      ports:
+        - name: nfs
+          containerPort: 2049
+          protocol: TCP
+        - name: mountd
+          containerPort: 20048
+        - name: rpcbind
+          containerPort: 111
+        - name: rpcbind-udp
+          containerPort: 111
+          protocol: UDP
+      securityContext:
+        - privileged: true
+          capabilities:
+            add:
+              - DAC_READ_SEARCH
+              - SYS_RESOURCE
+      args:
+        - "-provisioner=autostructure-development/nfs-storage"
+      env:
+        - name: NFS_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: NFS_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SERVICE_NAME
+          value: nfs-server
+      imagePullPolicy: "IfNotPresent"
+      volumeMounts:
+      - name: nfs-export-volume
+        mountPath: /export
   nodeSelector:
     node-role.kubernetes.io/nfs-server: "nfs-server"
