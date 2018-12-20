@@ -19,6 +19,7 @@ spec:
   containers:
   - name: nfs-server
     image: gcr.io/google_containers/volume-nfs:0.8
+    # image: quay.io/kubernetes_incubator/nfs-provisioner
     securityContext:
       privileged: true
     ports:
@@ -43,6 +44,7 @@ spec:
   containers:
   - name: nfs-server
     image: gcr.io/google_containers/volume-nfs:0.8
+    # image: quay.io/kubernetes_incubator/nfs-provisioner
     securityContext:
       privileged: true
     ports:
