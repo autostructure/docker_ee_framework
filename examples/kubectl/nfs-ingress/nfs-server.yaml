@@ -1,8 +1,9 @@
 ---
-# ability to deploy separate nfs nodes for each project or environment...
-# using a node selector to assign to a specific node (assigned the nfs-server role)
+# Deploying separate nfs-server nodes for each project and/or environment...
+# Using a node selector to assign nfs to specific nodes (via the nfs-server role)
 # e.g.
 # kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
+#
 apiVersion: v1
 kind: Pod
 metadata:

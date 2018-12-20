@@ -28,3 +28,11 @@ spec:
           # OR...
           # command: ["tailf"]
           # args: ["/dev/null"]
+          # 
+          # volumeMounts:
+          #   - name: nginx-nfs-vol-001
+          #     mountPath: /usr/share/nginx/html
+      # volumes:
+      #   - name: nginx-nfs-vol-002
+      #     persistentVolumeClaim:
+      #       claimName: nfs-claim-3g

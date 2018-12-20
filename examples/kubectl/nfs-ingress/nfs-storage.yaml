@@ -1,0 +1,17 @@
+---
+# You do not need the nfs server ip address in the storage class.
+# Ignore the advice found on:
+# https://docs.docker.com/ee/ucp/admin/configure/use-nfs-volumes/#create-the-nfs-server
+#
+# The nfs server ip-address is now configured in the persistent volume object.
+#
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: nfs-storage
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  labels:
+    kubernetes.io/cluster-service: "true"
+provisioner: kubernetes.io/nfs
+reclaimPolicy: Retain
