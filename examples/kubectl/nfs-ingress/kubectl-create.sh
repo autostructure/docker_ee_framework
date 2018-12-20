@@ -27,6 +27,7 @@ kubectl create -f ingress-controller.yaml
 # apply the yml with the substituted value
 #echo "$template" | kubectl apply -f -
 
+# or?
 
 # export POD_IP=`kubectl describe pod nfs-server | grep IP: | grep -oE '[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}'`
 # sed "s/{{nfs-server-ip-address}}/$POD_IP/g" nfs-volume.yaml.template > nfs-volume.yaml

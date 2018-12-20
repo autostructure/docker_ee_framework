@@ -6,7 +6,7 @@ kubectl delete deployment nginx-ingress-controller --namespace autostructure-dev
 kubectl delete service nginx-ingress-default-backend --namespace autostructure-development
 kubectl delete deployment nginx-ingress-default-backend --namespace autostructure-development
 kubectl delete ingress nginx-ingress-resource --namespace autostructure-development
-kubectl delete svc test-service --namespace autostructure-development
+kubectl delete svc test-web-service --namespace autostructure-development
 kubectl delete deployment test-nginx-ingress --namespace autostructure-development
 
 # default namespace...
@@ -15,7 +15,7 @@ kubectl delete deployment nginx-ingress-controller
 kubectl delete service nginx-ingress-default-backend
 kubectl delete deployment nginx-ingress-default-backend
 kubectl delete ingress nginx-ingress-resource
-kubectl delete svc test-service
+kubectl delete svc test-web-service
 kubectl delete deployment test-nginx-ingress
 
 # volume claims
