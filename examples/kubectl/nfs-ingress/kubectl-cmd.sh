@@ -32,9 +32,9 @@ kubectl create -f nfs-volume.yaml
 kubectl create -f nfs-claim.yaml
 kubectl create -f nginx-webserver-deployment.yaml
 kubectl create -f nginx-webserver-service.yaml
-#kubectl create -f ingress-resource.yaml
-#kubectl create -f ingress-controller.yaml
-#kubectl create -f ingress-default-backend.yaml
+kubectl create -f ingress-resource.yaml
+kubectl create -f ingress-controller.yaml
+kubectl create -f ingress-default-backend.yaml
 
 kubectl get po --all-namespaces
 kubectl get nodes --show-labels

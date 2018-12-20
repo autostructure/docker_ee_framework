@@ -25,7 +25,7 @@ kubectl delete pvc nfs-claim-1g
 # low-level resources with no namespaces...
 kubectl delete pv nfs-vol-autostructure-development
 kubectl delete pv nfs-vol-default
-#kubectl delete storageclass nfs-storage
+kubectl delete storageclass nfs-storage
 
 # nfs-servers...
 kubectl delete pod nfs-server --namespace autostructure-development

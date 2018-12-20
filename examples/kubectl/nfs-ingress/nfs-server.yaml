@@ -8,7 +8,9 @@
 # Run command in existing pod (1 container case)
 # $ kubectl exec nfs-pod -- /bin/bash
 # Run command in existing pod (multi-container case)
-# $ kubectl exec nfs-pod -c nfs-container -- /bin/bash
+# $ kubectl exec nfs-pod -c nfs-container -it -- /bin/bash
+# $ kubectl exec nfs-server -it -- /bin/bash
+# $ kubectl exec nfs-server -it --namespace=autostructure-development -- /bin/bash
 #
 # @mahdix kubectl create command now just add image, because we want it enough simple.
 # but now 1.8 support kubectl set env command.

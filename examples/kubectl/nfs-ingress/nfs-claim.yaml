@@ -5,7 +5,9 @@ metadata:
   namespace: default
   name: nfs-claim-1g
   annotations:
-    volume.beta.kubernetes.io/storage-class: "autostructure.io/nfs-storage"
+    volume.beta.kubernetes.io/storage-class: "nfs-storage"
+  labels:
+    type: nfs
 spec:
   accessModes:
     - ReadWriteMany
@@ -15,6 +17,9 @@ spec:
   resources:
     requests:
       storage: 1Gi
+  selector:
+    matchLabels:
+      type: "nfs"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -22,7 +27,9 @@ metadata:
   namespace: autostructure-development
   name: nfs-claim-3g
   annotations:
-    volume.beta.kubernetes.io/storage-class: "autostructure.io/nfs-storage"
+    volume.beta.kubernetes.io/storage-class: "nfs-storage"
+  labels:
+    type: nfs
 spec:
   accessModes:
     - ReadWriteMany
@@ -32,3 +39,6 @@ spec:
   resources:
     requests:
       storage: 3Gi
+  selector:
+    matchLabels:
+      type: "nfs"

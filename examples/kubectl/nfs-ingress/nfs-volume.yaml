@@ -1,4 +1,10 @@
 ---
+# Note:
+# First, replace "{{nfs-server-ip-address}}"
+# And, replace "{{autostructure-development-nfs-server-ip-address}}"
+# by running this command:
+# $ kubectl describe pod nfs-server | grep IP:
+#
 # PersistentVolumes don't use namespaces.
 # However, nfs runs in a container (with a namespace).
 # So, a separate PersistentVolume is necessary to point to
@@ -12,7 +18,6 @@ metadata:
   labels:
     type: nfs
 spec:
-  storageClassName: nfs-storage
   capacity:
     storage: 16Gi
   accessModes:
@@ -32,7 +37,6 @@ metadata:
   labels:
     type: nfs
 spec:
-  storageClassName: nfs-storage
   capacity:
     storage: 16Gi
   accessModes:
@@ -42,5 +46,5 @@ spec:
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.0.65.70
+    server: 10.0.210.150
     path: /
