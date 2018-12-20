@@ -19,32 +19,66 @@
 #
 # @See https://github.com/kubernetes/kubernetes/issues/52787
 #
-
-# ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   namespace: default
-#   name: nfs-server
-#   labels:
-#     role: nfs-server
-# spec:
-#   tolerations:
-#   - key: node-role.kubernetes.io/nfs-server
-#     effect: NoSchedule
-#   nodeSelector:
-#     node-role.kubernetes.io/nfs-server: "nfs-server"
-#   restartPolicy: Always
-#   containers:
-#   - name: nfs-server
-#     image: gcr.io/google_containers/volume-nfs:0.8
-#     securityContext:
-#       privileged: true
-#     ports:
-#       - name: nfs-0
-#         containerPort: 2049
-#         protocol: TCP
-
+kind: Pod
+apiVersion: v1
+metadata:
+  namespace: default
+  name: nfs-server
+  labels:
+    role: nfs-server
+spec:
+  volumes:
+    - name: nfs-export-volume
+      hostPath:
+        path: /srv/nfs-provisioner/default/nfs-server
+  containers:
+    - name: nfs-provisioner
+      image: quay.io/kubernetes_incubator/nfs-provisioner:latest
+      ports:
+        - name: nfs
+          containerPort: 2049
+          protocol: TCP
+        - name: mountd
+          containerPort: 20048
+        - name: rpcbind
+          containerPort: 111
+        - name: rpcbind-udp
+          containerPort: 111
+          protocol: UDP
+      securityContext:
+        privileged: true
+        capabilities:
+          add:
+            - DAC_READ_SEARCH
+      args:
+        - "-provisioner=kubernetes.io/nfs"
+        - "-grace-period=0"
+      env:
+        - name: NFS_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: NFS_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SERVICE_NAME
+          value: nfs-server
+      imagePullPolicy: "IfNotPresent"
+      volumeMounts:
+        - name: nfs-export-volume
+          mountPath: /export
+  nodeSelector:
+    node-role.kubernetes.io/nfs-server: "nfs-server"
+---
 kind: Pod
 apiVersion: v1
 metadata:
@@ -72,6 +106,7 @@ spec:
           containerPort: 111
           protocol: UDP
       securityContext:
+        privileged: true
         capabilities:
           add:
             - DAC_READ_SEARCH
@@ -106,6 +141,8 @@ spec:
 
 
 
+
+# DEPLOYMENT VERSION CODE (USE POD, THIS UNTESTED)
 # kind: Deployment
 # apiVersion: extensions/v1beta1
 # metadata:
@@ -243,3 +280,32 @@ spec:
 #         mountPath: /export
 #   nodeSelector:
 #     node-role.kubernetes.io/nfs-server: "nfs-server"
+
+
+
+
+# OLD V1.0 CODE...
+# ---
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   namespace: default
+#   name: nfs-server
+#   labels:
+#     role: nfs-server
+# spec:
+#   tolerations:
+#   - key: node-role.kubernetes.io/nfs-server
+#     effect: NoSchedule
+#   nodeSelector:
+#     node-role.kubernetes.io/nfs-server: "nfs-server"
+#   restartPolicy: Always
+#   containers:
+#   - name: nfs-server
+#     image: gcr.io/google_containers/volume-nfs:0.8
+#     securityContext:
+#       privileged: true
+#     ports:
+#       - name: nfs-0
+#         containerPort: 2049
+#         protocol: TCP

@@ -3,8 +3,8 @@
 #kubectl create -r namespaces.yaml
 #kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
 
-# kubectl create -f nfs-server.yaml
-# kubectl describe pod nfs-server --namespace=autostructure-development| grep IP:
+#kubectl create -f nfs-server.yaml
+#kubectl describe pod nfs-server --namespace=autostructure-development| grep IP:
 
 kubectl create -f nfs-storage.yaml
 kubectl create -f nfs-volume.yaml

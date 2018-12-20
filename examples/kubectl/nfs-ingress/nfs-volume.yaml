@@ -52,8 +52,8 @@ spec:
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.0.65.68
-    path: /export
+    server: 10.0.210.161
+    path: /
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -72,5 +72,5 @@ spec:
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.0.210.156
-    path: /export
+    server: 10.0.210.160
+    path: /
