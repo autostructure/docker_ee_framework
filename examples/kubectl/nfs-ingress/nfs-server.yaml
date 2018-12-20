@@ -135,7 +135,7 @@ spec:
       imagePullPolicy: "IfNotPresent"
       volumeMounts:
         - name: nfs-export-volume
-          mountPath: /exports
+          mountPath: /export
   nodeSelector:
     node-role.kubernetes.io/nfs-server: "nfs-server"
 
