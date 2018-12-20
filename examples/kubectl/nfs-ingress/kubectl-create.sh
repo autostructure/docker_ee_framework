@@ -3,15 +3,18 @@
 #kubectl create -r namespaces.yaml
 #kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
 
-#kubectl create -f nfs-server.yaml
-#kubectl create -f nfs-storage.yaml
+# kubectl create -f nfs-server.yaml
+# kubectl describe pod nfs-server --namespace=autostructure-development| grep IP:
+
+kubectl create -f nfs-storage.yaml
 kubectl create -f nfs-volume.yaml
 kubectl create -f nfs-claim.yaml
-kubectl create -f nginx-webserver-deployment.yaml
-kubectl create -f nginx-webserver-service.yaml
-kubectl create -f ingress-resource.yaml
-kubectl create -f ingress-default-backend.yaml
-kubectl create -f ingress-controller.yaml
+
+# kubectl create -f nginx-webserver-deployment.yaml
+# kubectl create -f nginx-webserver-service.yaml
+# kubectl create -f ingress-resource.yaml
+# kubectl create -f ingress-default-backend.yaml
+# kubectl create -f ingress-controller.yaml
 
 
 

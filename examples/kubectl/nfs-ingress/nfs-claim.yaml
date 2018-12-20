@@ -9,6 +9,7 @@ metadata:
   labels:
     type: nfs
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce
@@ -17,9 +18,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  selector:
-    matchLabels:
-      type: "nfs"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -29,8 +27,9 @@ metadata:
   annotations:
     volume.beta.kubernetes.io/storage-class: "nfs-storage"
   labels:
-    type: nfs
+    app: test-nginx-ingress
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce
@@ -39,6 +38,3 @@ spec:
   resources:
     requests:
       storage: 3Gi
-  selector:
-    matchLabels:
-      type: "nfs"

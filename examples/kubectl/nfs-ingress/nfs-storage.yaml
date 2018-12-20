@@ -6,12 +6,14 @@
 # The nfs server ip-address is now configured in the persistent volume object.
 #
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: nfs-storage
   labels:
-    type: nfs
-provisioner: autostructure.io/nfs-storage
+    kubernetes.io/cluster-service: "true"
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/nfs
 
 # kubernetes version...
 # kind: StorageClass
