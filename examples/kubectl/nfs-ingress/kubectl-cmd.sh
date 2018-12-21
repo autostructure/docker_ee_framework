@@ -49,8 +49,8 @@ echo
 echo "ip address and port info for testing nginx deployments..."
 kubectl get nodes -o yaml | grep ExternalIP -C 1
 kubectl get nodes -o yaml | grep InternalIP -C 1
-kubectl get svc test-service -o yaml | grep nodePort -C 5
-kubectl get svc test-service -o yaml --namespace=autostructure-development | grep nodePort -C 5
+kubectl get svc test-web-service -o yaml | grep nodePort -C 5
+kubectl get svc test-web-service -o yaml --namespace=autostructure-development | grep nodePort -C 5
 
 echo "Test the nginx install by returning a web page using the curl command."
 echo "You must use the InternalIP/ExternalIP and the nodePort"
@@ -60,9 +60,9 @@ echo "curl http://192.168.5.24:33080 -k"
 # ssh nfs001.autostructure.io
 # su
 # docker ps
+# docker container exec -it <container> /bin/bash
 # docker container exec -it k8s_nginx_nginx-deployment-54f64d7b56-7wdkz_default_7f59b31a-021d-11e9-b608-0242ac110004_0 ls -pal /usr/share/nginx/html
 # docker container exec -it k8s_nfs-server_nfs-server_default_b8027b81-ffe9-11e8-9018-0242ac110004_0 ls -pal /exports
-# docker container exec -it k8s_nfs-server_nfs-server_default_b8027b81-ffe9-11e8-9018-0242ac110004_0 /bin/bash
 #
 # Run command in existing pod (1 container case)
 kubectl exec my-pod -- /bin/bash

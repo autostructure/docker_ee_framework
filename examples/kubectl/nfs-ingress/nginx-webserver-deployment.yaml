@@ -50,7 +50,7 @@ spec:
       volumes:
         - name: nginx-nfs-vol-001
           persistentVolumeClaim:
-            claimName: nfs-claim-3g
+            claimName: nfs-claim-1g
       containers:
         - name: nginx
           image: nginx:1.15.4
