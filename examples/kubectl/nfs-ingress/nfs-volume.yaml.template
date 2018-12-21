@@ -9,12 +9,7 @@
 #     server: nfs-server.default.svc.cluster.local
 #
 # PersistentVolumes don't use namespaces.
-# However, nfs runs in a container (with a namespace).
-# So, a separate PersistentVolume is necessary to point to
-# the nfs ip address in the autostructure-development namespace.
-# The PersistentVolumeClaim wont care which volume it connects to,
-# as long as the volume satisfies the claim (e.g. does it have the space?)
-# added storageClassName: nfs-storage
+#
 kind: PersistentVolume
 apiVersion: v1
 metadata:
