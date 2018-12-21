@@ -1,9 +1,12 @@
 ---
 # Note:
 # First, replace "{{nfs-server-ip-address}}"
-# And, replace "{{autostructure-development-nfs-server-ip-address}}"
 # by running this command:
 # $ kubectl describe pod nfs-server | grep IP:
+#
+# Tried to reference nfs-server ip using kube-dns,
+# but it did not work...
+#     server: nfs-server.default.svc.cluster.local
 #
 # PersistentVolumes don't use namespaces.
 # However, nfs runs in a container (with a namespace).
@@ -31,4 +34,3 @@ spec:
   nfs:
     server: 10.96.49.164
     path: /
-# nfs-server.default.svc.cluster.local

@@ -1,9 +1,12 @@
 ---
 # Note:
 # First, replace "{{nfs-server-ip-address}}"
-# And, replace "{{autostructure-development-nfs-server-ip-address}}"
 # by running this command:
 # $ kubectl describe pod nfs-server | grep IP:
+#
+# Tried to reference nfs-server ip using kube-dns,
+# but it did not work...
+#     server: nfs-server.default.svc.cluster.local
 #
 # PersistentVolumes don't use namespaces.
 # However, nfs runs in a container (with a namespace).
@@ -11,8 +14,9 @@
 # the nfs ip address in the autostructure-development namespace.
 # The PersistentVolumeClaim wont care which volume it connects to,
 # as long as the volume satisfies the claim (e.g. does it have the space?)
-apiVersion: v1
+# added storageClassName: nfs-storage
 kind: PersistentVolume
+apiVersion: v1
 metadata:
   name: nfs-vol-default
   labels:
@@ -20,7 +24,7 @@ metadata:
 spec:
   storageClassName: nfs-storage
   capacity:
-    storage: 16Gi
+    storage: 32Gi
   accessModes:
     - ReadWriteMany
     # - ReadWriteOnce
@@ -29,24 +33,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: {{nfs-server-ip-address}}
-    path: /
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nfs-vol-autostructure-development
-  labels:
-    type: nfs
-spec:
-  storageClassName: nfs-storage
-  capacity:
-    storage: 16Gi
-  accessModes:
-    - ReadWriteMany
-    # - ReadWriteOnce
-    # - ReadOnlyMany
-    # - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    server: {{autostructure-development-nfs-server-ip-address}}
     path: /
