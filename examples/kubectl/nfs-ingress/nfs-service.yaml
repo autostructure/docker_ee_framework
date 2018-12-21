@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: nfs-server
+  labels:
+    role: nfs-server
+spec:
+  ports:
+  - port: 2049
+    targetPort: 2049
+    protocol: TCP
+    name: nfs
+  selector:
+    role: nfs-server

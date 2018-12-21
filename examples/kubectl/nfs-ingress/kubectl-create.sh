@@ -4,11 +4,12 @@
 #kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
 
 # kubectl create -f nfs-server.yaml
+# kubectl create -f nfs-service.yaml
 # echo "Please wait for nfs-servers to appear (10s)"
 # sleep 10
 # kubectl describe pod nfs-server | grep IP:
 
-kubectl create -f nfs-storage.yaml
+#kubectl create -f nfs-storage.yaml
 kubectl create -f nfs-volume.yaml
 kubectl create -f nfs-claim.yaml
 

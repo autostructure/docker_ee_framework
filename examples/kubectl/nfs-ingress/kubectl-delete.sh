@@ -19,14 +19,14 @@ kubectl delete svc test-web-service
 kubectl delete deployment test-nginx-ingress
 
 # volume claims
-kubectl delete pvc nfs-claim-3g --namespace autostructure-development
-kubectl delete pvc nfs-claim-1g
+kubectl delete pvc nfs-claim-1g --namespace autostructure-development
 
 # low-level resources with no namespaces...
 kubectl delete pv nfs-vol-default
-kubectl delete storageclass nfs-storage
+#kubectl delete storageclass nfs-storage
 
 # nfs-servers...
+# kubectl delete service nfs-server
 # kubectl delete pod nfs-server
 # kubectl delete pod nfs-server --namespace autostructure-development
 
