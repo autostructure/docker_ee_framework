@@ -1,10 +1,9 @@
+.git/
 .*.sw[op]
 .metadata
 .yardoc
 .yardwarns
-.DS_Store
 *.iml
-*.log
 /.bundle/
 /.idea/
 /.vagrant/
@@ -21,5 +20,5 @@
 /tmp/
 /vendor/
 /convert_report.txt
-*.tfstate
-examples/terraform/.terraform/plugins
+/update_report.txt
+.DS_Store

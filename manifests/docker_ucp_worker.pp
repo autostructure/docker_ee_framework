@@ -16,12 +16,12 @@ class docker_ee_framework::docker_ucp_worker (
   String          $nfs_server_mount,
   String          $docker_image = 'docker/ucp:3.1.0',
 ) {
-  class { '::docker_ucp::docker_ucp_mount_nfs':
-    nfs_client_mount_parents => $nfs_client_mount_parents,
-    nfs_client_mount         => $nfs_client_mount,
-    nfs_host                 => $nfs_host,
-    nfs_server_mount         => $nfs_server_mount,
-  }
+  # class { '::docker_ucp::docker_ucp_mount_nfs':
+  #   nfs_client_mount_parents => $nfs_client_mount_parents,
+  #   nfs_client_mount         => $nfs_client_mount,
+  #   nfs_host                 => $nfs_host,
+  #   nfs_server_mount         => $nfs_server_mount,
+  # }
 
   # docker image pull docker/ucp:3.1.0
   docker::image { $docker_image: }
@@ -39,6 +39,6 @@ class docker_ee_framework::docker_ucp_worker (
   }
 
   Class['::docker']
-  -> Class['::docker_ucp::docker_ucp_mount_nfs']
+  # -> Class['::docker_ucp::docker_ucp_mount_nfs']
   -> Class['::harden_docker']
 }
