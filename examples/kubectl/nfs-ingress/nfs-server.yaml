@@ -34,9 +34,12 @@ spec:
     node-role.kubernetes.io/nfs-server: "nfs-server"
   restartPolicy: Always
   volumes:
-    - name: nfs-hostpath-volume
+    - name: nfs-hostpath-volume-files
       hostPath:
-        path: /srv/nfs-provisioner/nfs-server
+        path: /srv/nfs-server/files
+    - name: nfs-hostpath-volume-etc-export
+      hostPath:
+        path: /srv/nfs-server/etc/export # can we just point to a file?
   containers:
     - name: nfs-server
       image: gcr.io/google_containers/volume-nfs:0.8
@@ -48,7 +51,9 @@ spec:
           containerPort: 2049
           protocol: TCP
       volumeMounts:
-        - name: nfs-hostpath-volume
+        - name: nfs-hostpath-volume-files
           mountPath: /exports
+        - name: nfs-hostpath-volume-etc-export
+          mountPath: /etc/export
   nodeSelector:
     node-role.kubernetes.io/nfs-server: "nfs-server"
