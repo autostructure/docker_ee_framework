@@ -1,12 +1,15 @@
-resource "vsphere_virtual_machine" "nfs" {
-  name             = "nfs001"
+# Change hostname for docker_ucp_worker_nodes in 2 places.
+
+resource "vsphere_virtual_machine" "docker_ucp_worker_nodes" {
+  name             = "worker002"
   resource_pool_id = "${vsphere_resource_pool.docker_ee_pool.id}"
   datastore_id     = "${data.vsphere_datastore.DS0.id}"
-  num_cpus         = 2
-  memory           = 8192
+
+  num_cpus         = 4
+  memory           = 4096
   guest_id         = "centos7_64Guest"
 
-  wait_for_guest_net_timeout = "${var.timeout_minutes}"
+  wait_for_guest_net_timeout = 20
 
   network_interface {
     network_id   = "${data.vsphere_network.network.id}"
@@ -15,7 +18,7 @@ resource "vsphere_virtual_machine" "nfs" {
 
   disk {
     label            = "disk0"
-    size             = 128
+    size             = 16
     thin_provisioned = true
   }
 
@@ -24,7 +27,7 @@ resource "vsphere_virtual_machine" "nfs" {
 
     customize {
       linux_options {
-        host_name = "nfs001"
+        host_name = "worker002"
         domain    = "autostructure.io"
       }
       network_interface {}
@@ -35,7 +38,7 @@ resource "vsphere_virtual_machine" "nfs" {
 
   provisioner "remote-exec" {
     inline = [
-      "/bin/curl -k https://master.autostructure.io:8140/packages/current/install.bash | sudo bash -s extension_requests:pp_role=nfs_server",
+      "/bin/curl -k https://master.autostructure.io:8140/packages/current/install.bash | sudo bash -s extension_requests:pp_role=docker_ucp_worker",
     ]
 
     connection {

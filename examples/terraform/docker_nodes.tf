@@ -34,7 +34,7 @@ resource "vsphere_virtual_machine" "docker_ucp_manager_nodes" {
   resource_pool_id = "${vsphere_resource_pool.docker_ee_pool.id}"
   datastore_id     = "${data.vsphere_datastore.DS0.id}"
 
-  num_cpus         = 2
+  num_cpus         = 4
   memory           = 8192
   guest_id         = "centos7_64Guest"
 
@@ -86,7 +86,7 @@ resource "vsphere_virtual_machine" "docker_ucp_worker_nodes" {
   resource_pool_id = "${vsphere_resource_pool.docker_ee_pool.id}"
   datastore_id     = "${data.vsphere_datastore.DS0.id}"
 
-  num_cpus         = 1
+  num_cpus         = 4
   memory           = 4096
   guest_id         = "centos7_64Guest"
 

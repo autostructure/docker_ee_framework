@@ -4,6 +4,8 @@
 .yardoc
 .yardwarns
 *.iml
+*.log
+/*/*/.terraform/
 /.bundle/
 /.idea/
 /.vagrant/
