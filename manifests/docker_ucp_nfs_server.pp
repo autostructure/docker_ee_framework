@@ -13,7 +13,7 @@
 # to add nfs sub-directories (e.g. /exports/<sub-dir>) and
 # edit the /etc/exports file to change nfs permissions.
 #
-class docker_ee_framework::docker_ucp_nfs_server(
+class docker_ee_framework::docker_ucp_nfs_server (
   Stdlib::Httpurl $docker_ee_url,
   Stdlib::Httpurl $docker_ee_key_source,
   Array           $nfs_server_mount_parents,
