@@ -4,44 +4,24 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  namespace: default
-  name: nginx-ingress-resource
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: ci-cd
+  name: nginx-ingress-jenkins-test
+  labels:
+    app: jenkins3
+    chart: jenkins-0.26.0
+    component: jenkins3-jenkins-master
+    heritage: Tiller
+    release: jenkins3
 spec:
+  backend:
+    serviceName: jenkins3
+    servicePort: 8080
   rules:
-  - http:
+  - host: jenkins.autostructure.io
+    http:
       paths:
-      - path: /test-ingress
-        backend:
-          serviceName: test-service
-          servicePort: 33380
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  namespace: autostructure-development
-  name: nginx-ingress-resource
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /test-ingress
-        backend:
-          serviceName: nginx-service
-          servicePort: 32880
-  # - host: www.mysite.com
-  #   http:
-  #     paths:
-  #     - path: /website-subdir
-  #       backend:
-  #         serviceName: nginx-service
-  #         servicePort: 80
-  # - host: www.mysite.com
-  #   http:
-  #     paths:
-  #     - backend:
-  #         serviceName: website
-  #         servicePort: 80
+      - backend:
+          serviceName: jenkins3
+          servicePort: 8080
+        path: /
+        
