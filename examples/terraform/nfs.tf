@@ -35,7 +35,7 @@ resource "vsphere_virtual_machine" "nfs" {
 
   provisioner "remote-exec" {
     inline = [
-      "/bin/curl -k https://master.autostructure.io:8140/packages/current/install.bash | sudo bash -s extension_requests:pp_role=nfs_server",
+      "/bin/curl -k https://master.autostructure.io:8140/packages/current/install.bash | sudo bash -s extension_requests:pp_role=docker_ucp_nfs_server",
     ]
 
     connection {
