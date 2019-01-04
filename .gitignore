@@ -6,6 +6,8 @@
 *.iml
 *.log
 /*/*/.terraform/
+/*/*/*/.terraform/
+/*/*/*/*/.terraform/
 /.bundle/
 /.idea/
 /.vagrant/

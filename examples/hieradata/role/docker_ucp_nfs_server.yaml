@@ -2,7 +2,7 @@
 # Field hiera.yaml hierarchy entry:
 #  - "role/%{::trusted.extensions.pp_role}"
 # This file is for:
-# pp_role = nfs_server
+# pp_role = docker_ucp_nfs_server
 #
 profile::docker_ucp_nfs_server::nfs_server_mount: /nfs-share/docker-workers/jenkins
 profile::docker_ucp_nfs_server::nfs_server_mount_root: /nfs-share
@@ -10,6 +10,6 @@ profile::docker_ucp_nfs_server::nfs_server_mount_parents:
   - /nfs-share
   - /nfs-share/docker-workers
 
-profile::docker_ucp_nfs_server::docker_ee_url: https://storebits.docker.com/ee/centos/sub-d0519671-678e-4e17-9f95-652215c673ab/centos/7/x86_64/stable,
-profile::docker_ucp_nfs_server::docker_ee_key_source: https://storebits.docker.com/ee/centos/sub-d0519671-678e-4e17-9f95-652215c673ab/centos/gpg,
+profile::docker_ucp_nfs_server::docker_ee_url: https://storebits.docker.com/ee/centos/sub-d0519671-678e-4e17-9f95-652215c673ab/centos/7/x86_64/stable
+profile::docker_ucp_nfs_server::docker_ee_key_source: https://storebits.docker.com/ee/centos/sub-d0519671-678e-4e17-9f95-652215c673ab/centos/gpg
 profile::docker_ucp_nfs_server::docker_image: docker/ucp:3.1.0
