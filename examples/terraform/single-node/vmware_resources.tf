@@ -50,3 +50,8 @@ data "vsphere_virtual_machine" "template" {
   name          = "CentOS"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
+
+resource "vsphere_resource_pool" "docker_ee_pool" {
+  name                    = "docker_ee_pool2"
+  parent_resource_pool_id = "${data.vsphere_host.host.resource_pool_id}"
+}

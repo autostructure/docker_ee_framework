@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# drain a node before deleting (if other nodes remain to pick up pods)
+# kubectl drain $NODE --force=true --ignore-daemonsets=true
+
 # autostructure-development namespace...
 kubectl delete service nginx-ingress-controller --namespace autostructure-development
 kubectl delete deployment nginx-ingress-controller --namespace autostructure-development

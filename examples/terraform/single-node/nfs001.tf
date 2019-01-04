@@ -6,7 +6,7 @@ resource "vsphere_virtual_machine" "nfs" {
   memory           = 8192
   guest_id         = "centos7_64Guest"
 
-  wait_for_guest_net_timeout = "${var.timeout_minutes}"
+  wait_for_guest_net_timeout = 20
 
   network_interface {
     network_id   = "${data.vsphere_network.network.id}"
