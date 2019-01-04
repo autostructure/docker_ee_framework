@@ -67,9 +67,9 @@
 #             valueFrom:
 #               fieldRef:
 #                 fieldPath: metadata.namespace
-#         args:
+#         #args:
 #         #- /ingress-controller
-#         - --default-backend-service=$(POD_NAMESPACE)/nginx-ingress-default-backend
+#         #- --default-backend-service=$(POD_NAMESPACE)/nginx-ingress-default-backend
 ---
 apiVersion: v1
 kind: Service
@@ -134,6 +134,6 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-        args:
+        #ßargs:
           #- /ingress-controller
-          - --default-backend-service=$(POD_NAMESPACE)/nginx-ingress-default-backend
+          #- --default-backend-service=$(POD_NAMESPACE)/nginx-ingress-default-backend
