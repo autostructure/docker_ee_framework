@@ -27,5 +27,5 @@ spec:
     # - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.96.19.125
+    server: 10.96.75.35
     path: /

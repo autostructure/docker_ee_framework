@@ -23,8 +23,8 @@ kubectl delete ingress nginx-ingress-resource
 kubectl delete pvc nfs-claim-1g --namespace autostructure-development
 
 # low-level resources with no namespaces...
-kubectl delete pv nfs-vol-default
-#kubectl delete storageclass nfs-storage
+# kubectl delete pv nfs-vol-default
+# kubectl delete storageclass nfs-storage
 
 # nfs-servers...
 # kubectl delete service nfs-server

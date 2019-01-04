@@ -1,8 +1,9 @@
 #!/bin/sh
 
-#kubectl create -r namespaces.yaml
-#kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
+# kubectl create -f namespaces.yaml
 
+# nfs...
+# kubectl label node nfs001 node-role.kubernetes.io/nfs-server=nfs-server
 # kubectl create -f nfs-server.yaml
 # kubectl create -f nfs-service.yaml
 # echo "Please wait for nfs-servers to appear (10s)"
